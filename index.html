@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Калькулятор Пифагорейской нумерологии</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="https://ru.vuejs.org/images/icons/favicon-32x32.png">
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+  <link href="https://fonts.googleapis.com/css?family=Nunito&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <div id="app" v-cloak>
+    <transition name="input-block">
+      <div v-if="showInputBlock" class="input-block block-design">
+        <h1>Пифагорейская нумерология</h1>
+        <h3>Основное имя:</h3>
+        <input v-model="firstName" type="text" placeholder="Имя">
+        <input v-model="secondName" type="text" placeholder="Фамилия">
+        <input v-model="fathersName" type="text" placeholder="Отчество">
+        <div class="date-input-container">
+          <input :class="{disabled: !watchDate}" :disabled="{disabled: !watchDate}" v-model="date" type="date" placeholder="Введите дату" value="2020-11-09">
+          <input class="watch-date-checkbox" v-model="watchDate" type="checkbox">
+        </div>
+        <label>
+          <input v-model="otherName" type="checkbox"> Альтернативное имя
+        </label>
+        <transition name="other-name">
+          <div v-if="otherName">
+            <h3>Альтернативное имя:</h3>
+            <input v-model="firstName2" type="text" placeholder="Имя">
+            <input v-model="secondName2" type="text" placeholder="Фамилия">
+            <input v-model="fathersName2" type="text" placeholder="Отчество">
+          </div>
+        </transition>
+        <div class="m-button" @click="countNumbers()">Посчитать</div>
+      </div>
+    </transition>
+  </div>
+  <script src="./script.js"></script>
+</body>
+</html>

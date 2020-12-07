@@ -1,0 +1,141 @@
+/* основное */
+* {
+  margin: 0;
+  padding: 0;
+  outline: none;
+  font-family: 'Nunito', sans-serif;
+  font-size: 16px;
+}
+
+
+[v-cloak] {
+  display: none;
+}
+
+body {
+  background-color: #ffffff;
+  overflow: hidden;
+}
+
+h1 {
+  text-align: center;
+  font-size: 25px;
+  margin-bottom: 10px;
+}
+
+h2 {
+  text-align: center;
+  font-size: 22px;
+}
+
+h3 {
+  margin: 15px 0;
+}
+
+.block-design {
+  background-color: #ffffff;
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: rgba(0, 0, 0, 0.3) 0 5px 10px 0;
+}
+
+.m-button {
+  padding: 0.5em;
+  border-radius: 2em;
+  background-color: #7fffd4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color linear 0.2s;
+}
+
+.m-button:hover {
+  background-color: #00ffaa;
+}
+
+input[type="text"], input[type="date"] {
+  padding: 0.5em;
+  border-radius: 2em;
+  border: solid 1px #d4d4d4;
+  transition: border linear 0.2s, background-color linear 0.2s, color linear 0.2s;
+  display: block;
+  width: -webkit-fill-available;
+  margin: 0 0 10px 0;
+  -webkit-appearance: none;
+}
+
+.other-name-enter-active,
+.other-name-leave-active {
+  transition: max-height 1s ease;
+  max-height: 192.5px;
+  overflow: hidden;
+}
+
+.other-name-enter,
+.other-name-leave-to {
+  max-height: 0;
+  overflow: hidden;
+}
+
+.input-block-enter-active,
+.input-block-leave-active {
+  transition: top ease 1s;
+  top: 0;
+}
+
+.input-block-enter,
+.input-block-leave-to {
+  top: -100%;
+}
+
+.input-block {
+  margin: 10px;
+  position: fixed;
+  left: 0;
+  right: 0;
+}
+
+.date-input-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.watch-date-checkbox {
+  margin: 0 0 10px 10px;
+  height: 20px;
+  width: 20px;
+}
+
+input.disabled {
+  color: #808080 !important;
+  background-color: #757575 !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #000000;
+    color: #ffffff;
+  }
+
+  .block-design {
+    background-color: #222222;
+  }
+
+  input[type="text"], input[type="date"] {
+    background-color: #333333;
+    color: #ffffff;
+    border: 1px solid #757575;
+  }
+
+  .m-button {
+    background-color: #483d8b;
+  }
+
+  .m-button:hover {
+    background-color: #7365d3;
+  }
+}
