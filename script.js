@@ -103,7 +103,7 @@ new Vue({
   },
   computed: {
     valid: function () {
-      const first = this.firstName;
+      const first = this.firstName.trim();
       let valid = true;
       first.split('').forEach(letter => {
         if (!this.letters.includes(letter)) {
@@ -113,7 +113,7 @@ new Vue({
       if (!valid) {
         return false;
       }
-      const second = this.secondName;
+      const second = this.secondName.trim();
       second.split('').forEach(letter => {
         if (!this.letters.includes(letter)) {
           valid = false;
@@ -122,7 +122,7 @@ new Vue({
       if (!valid) {
         return false;
       }
-      const father = this.fathersName;
+      const father = this.fathersName.trim();
       father.split('').forEach(letter => {
         if (!this.letters.includes(letter)) {
           valid = false;
@@ -134,7 +134,7 @@ new Vue({
       const date = this.date;
       const other = this.otherName;
       if (other) {
-        const first2 = this.firstName2;
+        const first2 = this.firstName2.trim();
         first2.split('').forEach(letter => {
           if (!this.letters.includes(letter)) {
             valid = false;
@@ -143,7 +143,7 @@ new Vue({
         if (!valid) {
           return false;
         }
-        const second2 = this.secondName2;
+        const second2 = this.secondName2.trim();
         second2.split('').forEach(letter => {
           if (!this.letters.includes(letter)) {
             valid = false;
@@ -152,7 +152,7 @@ new Vue({
         if (!valid) {
           return false;
         }
-        const father2 = this.fathersName2;
+        const father2 = this.fathersName2.trim();
         father2.split('').forEach(letter => {
           if (!this.letters.includes(letter)) {
             valid = false;
