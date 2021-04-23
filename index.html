@@ -42,24 +42,26 @@
       <h3>ФИО, ДР/ Характеристика</h3>
       <p>{{firstName}} {{secondName}} {{fathersName}}, {{results.day}}.{{results.month}}.{{results.year}}</p>
       <template v-if="watchDate">
-        <h3>Число Дня Рождения (ЧДР) – как, каким образом двигается по жизни.</h3>
+        <h3>Число Дня Рождения (ЧДР) – <b>как</b>, каким образом двигается по жизни.</h3>
         <p>{{results.CHDR}}/{{results.CHDR2}}</p>
-        <h3>Число Жизненного Пути (ЧЖП) – что делает. Основная задача в жизни, путь, по которому идет.</h3>
+        <h3>Число Жизненного Пути (ЧЖП) – <b>что</b> делает. Основная задача в жизни, путь, по которому идет.</h3>
         <p>{{results.CHJP}}</p>
-        <h3>Число Выражения (ЧВ) – ведущие черты характера и поведения.</h3>
+        <h3>Число Выражения (ЧВ) – ведущие <b>черты характера</b> и поведения.</h3>
         <p>{{results.CHV}} <span v-if="otherName">({{results.CHV2}})</span></p>
-        <h3>Число Души (ЧД) – внутренние мотивы, истинные желания, порывы души, направление духовного развития.</h3>
+        <h3>Число Души (ЧД) – внутренние <b>мотивы</b>, истинные желания, порывы души, направление духовного развития.</h3>
         <p>{{results.CHD}} <span v-if="otherName">({{results.CHD2}})</span></p>
-        <h3>Число Личности (ЧЛ) – впечатление на окружающих, имидж, внешние характеристики.</h3>
+        <h3>Число Личности (ЧЛ) – впечатление на окружающих, <b>имидж</b>, внешние характеристики.</h3>
         <p>{{results.CHL}} <span v-if="otherName">({{results.CHL2}})</span></p>
-        <h3>Управляющие Числа (УЧ)</h3>
+        <h3>Число Реализации (ЧР) – число истинного «Я», <b>конечная цель</b> деятельности, к чему стремится.</h3>
+        <p>{{results.CHR}} <span v-if="otherName">({{results.CHR2}})</span></p>
+        <h3 v-if="results.controlNumbers.length || results.controlNumbers2.length">Управляющие Числа (УЧ)</h3>
         <p>
           <span v-for="(controlNumber, index) in results.controlNumbers">{{controlNumber}}<span v-if="index + 1 < results.controlNumbers.length">,</span></span>
           <span v-if="otherName && results.controlNumbers2.length">
             (<span v-for="(controlNumber, index) in results.controlNumbers2">{{controlNumber}}<span v-if="index + 1 < results.controlNumbers2.length">,</span></span>)
           </span>
         </p>
-        <h3>Кармические Числа (КЧ)</h3>
+        <h3 v-if="results.karmicNumbers.length || results.karmicNumbers2.length">Кармические Числа (КЧ)</h3>
         <p>
           <span v-for="(karmicNumber, index) in results.karmicNumbers">{{karmicNumber}}<span v-if="index + 1 < results.karmicNumbers.length">,</span></span>
           <span v-if="otherName && results.karmicNumbers2.length">

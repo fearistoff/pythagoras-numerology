@@ -82,9 +82,9 @@ new Vue({
     letters: [],
     controlNumbers: [11,22,33],
     karmicNumbers: [10,13,14,16,19],
-    firstName: '',
-    secondName: '',
-    fathersName: '',
+    firstName: 'jkasd',
+    secondName: 'asd',
+    fathersName: 'asd',
     date: "2020-11-09",
     otherName: false,
     watchDate: true,
@@ -99,7 +99,9 @@ new Vue({
     CHD: 0,
     CHD2: 0,
     CHL: 0,
-    CHL2: 0
+    CHL2: 0,
+    CHR: 0,
+    CHR2: 0
   },
   computed: {
     valid: function () {
@@ -218,7 +220,6 @@ new Vue({
         second2Consonants = this.vowelsOrConsonants(this.secondName2, this.results.secondName2Array);
         father2Vowels = this.vowelsOrConsonants(this.fathersName2, this.results.fathersName2Array, true);
         father2Consonants = this.vowelsOrConsonants(this.fathersName2, this.results.fathersName2Array);
-        this.results.CHDR2 = this.splitAndAdd(this.results.day);
         this.results.CHV2 = this.splitAndAdd(
           this.splitAndAdd(this.sunOfIntString(this.results.firstName2Array), true)
           +
@@ -237,6 +238,7 @@ new Vue({
           this.splitAndAdd(this.sunOfIntString(second2Consonants), true)
           +
           this.splitAndAdd(this.sunOfIntString(father2Consonants), true), true);
+        this.results.CHR2 = this.splitAndAdd(this.results.CHJP + this.results.CHV2);
       }
       if (this.watchDate) {
         this.results.day = parseInt(this.date.split('-')[2]);
@@ -244,6 +246,7 @@ new Vue({
         this.results.year = parseInt(this.date.split('-')[0]);
       }
       this.results.CHDR = this.results.day;
+      this.results.CHDR2 = this.splitAndAdd(this.results.day);
       this.results.CHJP = this.splitAndAdd(this.splitAndAdd(this.results.day) + this.splitAndAdd(this.results.month) + this.splitAndAdd(this.results.year));
       this.results.CHV = this.splitAndAdd(
         this.splitAndAdd(this.sunOfIntString(this.results.firstNameArray))
@@ -263,6 +266,7 @@ new Vue({
         this.splitAndAdd(this.sunOfIntString(secondConsonants))
         +
         this.splitAndAdd(this.sunOfIntString(fatherConsonants)));
+      this.results.CHR = this.splitAndAdd(this.results.CHJP + this.results.CHV);
       this.results.ready = true;
 
     },
