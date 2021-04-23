@@ -218,6 +218,25 @@ new Vue({
         second2Consonants = this.vowelsOrConsonants(this.secondName2, this.results.secondName2Array);
         father2Vowels = this.vowelsOrConsonants(this.fathersName2, this.results.fathersName2Array, true);
         father2Consonants = this.vowelsOrConsonants(this.fathersName2, this.results.fathersName2Array);
+        this.results.CHDR2 = this.splitAndAdd(this.results.day);
+        this.results.CHV2 = this.splitAndAdd(
+          this.splitAndAdd(this.sunOfIntString(this.results.firstName2Array), true)
+          +
+          this.splitAndAdd(this.sunOfIntString(this.results.secondName2Array), true)
+          +
+          this.splitAndAdd(this.sunOfIntString(this.results.fathersName2Array), true), true);
+        this.results.CHD2 = this.splitAndAdd(
+          this.splitAndAdd(this.sunOfIntString(first2Vowels), true)
+          +
+          this.splitAndAdd(this.sunOfIntString(second2Vowels), true)
+          +
+          this.splitAndAdd(this.sunOfIntString(father2Vowels), true),true);
+        this.results.CHL2 = this.splitAndAdd(
+          this.splitAndAdd(this.sunOfIntString(first2Consonants), true)
+          +
+          this.splitAndAdd(this.sunOfIntString(second2Consonants), true)
+          +
+          this.splitAndAdd(this.sunOfIntString(father2Consonants), true), true);
       }
       if (this.watchDate) {
         this.results.day = parseInt(this.date.split('-')[2]);
@@ -225,7 +244,6 @@ new Vue({
         this.results.year = parseInt(this.date.split('-')[0]);
       }
       this.results.CHDR = this.results.day;
-      this.results.CHDR2 = this.splitAndAdd(this.results.day);
       this.results.CHJP = this.splitAndAdd(this.splitAndAdd(this.results.day) + this.splitAndAdd(this.results.month) + this.splitAndAdd(this.results.year));
       this.results.CHV = this.splitAndAdd(
         this.splitAndAdd(this.sunOfIntString(this.results.firstNameArray))
@@ -233,36 +251,18 @@ new Vue({
         this.splitAndAdd(this.sunOfIntString(this.results.secondNameArray))
         +
         this.splitAndAdd(this.sunOfIntString(this.results.fathersNameArray)));
-      this.results.CHV2 = this.splitAndAdd(
-        this.splitAndAdd(this.sunOfIntString(this.results.firstName2Array), true)
-        +
-        this.splitAndAdd(this.sunOfIntString(this.results.secondName2Array), true)
-        +
-        this.splitAndAdd(this.sunOfIntString(this.results.fathersName2Array), true), true);
       this.results.CHD = this.splitAndAdd(
         this.splitAndAdd(this.sunOfIntString(firstVowels))
         +
         this.splitAndAdd(this.sunOfIntString(secondVowels))
         +
         this.splitAndAdd(this.sunOfIntString(fatherVowels)));
-      this.results.CHD2 = this.splitAndAdd(
-        this.splitAndAdd(this.sunOfIntString(first2Vowels), true)
-        +
-        this.splitAndAdd(this.sunOfIntString(second2Vowels), true)
-        +
-        this.splitAndAdd(this.sunOfIntString(father2Vowels), true),true);
       this.results.CHL = this.splitAndAdd(
         this.splitAndAdd(this.sunOfIntString(firstConsonants))
         +
         this.splitAndAdd(this.sunOfIntString(secondConsonants))
         +
         this.splitAndAdd(this.sunOfIntString(fatherConsonants)));
-      this.results.CHL2 = this.splitAndAdd(
-        this.splitAndAdd(this.sunOfIntString(first2Consonants), true)
-        +
-        this.splitAndAdd(this.sunOfIntString(second2Consonants), true)
-        +
-        this.splitAndAdd(this.sunOfIntString(father2Consonants), true), true);
       this.results.ready = true;
 
     },
