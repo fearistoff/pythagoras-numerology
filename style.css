@@ -12,6 +12,12 @@
   display: none;
 }
 
+#app {
+
+  height: 100vh;
+  overflow: auto;
+}
+
 body {
   background-color: #ffffff;
   overflow: hidden;
@@ -30,6 +36,7 @@ h2 {
 
 h3 {
   margin: 15px 0;
+  font-size: 17px;
 }
 
 .block-design {
@@ -50,6 +57,10 @@ h3 {
   cursor: pointer;
   font-weight: bold;
   transition: background-color linear 0.2s;
+}
+
+.m-button_disabled {
+  background-color: #bababa;
 }
 
 .m-button:hover {
@@ -82,13 +93,26 @@ input[type="text"], input[type="date"] {
 
 .input-block-enter-active,
 .input-block-leave-active {
-  transition: top ease 1s;
+  transition: top ease .4s;
   top: 0;
 }
 
 .input-block-enter,
 .input-block-leave-to {
   top: -100%;
+}
+
+
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity linear .4s;
+  opacity:1;
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
 }
 
 .input-block {
@@ -115,6 +139,10 @@ input.disabled {
   background-color: #757575 !important;
 }
 
+.results {
+  padding: 10px;
+}
+
 @media (prefers-color-scheme: dark) {
   body {
     background-color: #000000;
@@ -133,6 +161,10 @@ input.disabled {
 
   .m-button {
     background-color: #483d8b;
+  }
+
+  .m-button_disabled {
+    background-color: #8581a0;
   }
 
   .m-button:hover {

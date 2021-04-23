@@ -13,15 +13,15 @@
 <body>
   <div id="app" v-cloak>
     <transition name="input-block">
-      <div v-if="showInputBlock" class="input-block block-design">
+      <div v-if="!results.ready" class="input-block block-design">
         <h1>Пифагорейская нумерология</h1>
         <h3>Основное имя:</h3>
         <input v-model="firstName" type="text" placeholder="Имя">
         <input v-model="secondName" type="text" placeholder="Фамилия">
         <input v-model="fathersName" type="text" placeholder="Отчество">
         <div class="date-input-container">
-          <input :class="{disabled: !watchDate}" :disabled="{disabled: !watchDate}" v-model="date" type="date" placeholder="Введите дату" value="2020-11-09">
-          <input class="watch-date-checkbox" v-model="watchDate" type="checkbox">
+          <input :class="{disabled: !watchDate}" :disabled="!watchDate" v-model="date" type="date" placeholder="Введите дату" value="2020-11-09" />
+          <input class="watch-date-checkbox" v-model="watchDate" type="checkbox" />
         </div>
         <label>
           <input v-model="otherName" type="checkbox"> Альтернативное имя
@@ -34,10 +34,79 @@
             <input v-model="fathersName2" type="text" placeholder="Отчество">
           </div>
         </transition>
-        <div class="m-button" @click="countNumbers()">Посчитать</div>
+        <div class="m-button" @click="countNumbers()" :class="{'m-button_disabled': !valid}">Посчитать</div>
       </div>
+    </transition>
+    <transition name="fade">
+    <div v-if="results.ready" class="results">
+      <h3>ФИО, ДР/ Характеристика</h3>
+      <p>{{firstName}} {{secondName}} {{fathersName}}, {{results.day}}.{{results.month}}.{{results.year}}</p>
+      <template v-if="watchDate">
+        <h3>Число Дня Рождения (ЧДР) – как, каким образом двигается по жизни.</h3>
+        <p>{{results.CHDR}}/{{results.CHDR2}}</p>
+        <h3>Число Жизненного Пути (ЧЖП) – что делает. Основная задача в жизни, путь, по которому идет.</h3>
+        <p>{{results.CHJP}}</p>
+        <h3>Число Выражения (ЧВ) – ведущие черты характера и поведения.</h3>
+        <p>{{results.CHV}} <span v-if="otherName">({{results.CHV2}})</span></p>
+        <h3>Число Души (ЧД) – внутренние мотивы, истинные желания, порывы души, направление духовного развития.</h3>
+        <p>{{results.CHD}} <span v-if="otherName">({{results.CHD2}})</span></p>
+        <h3>Число Личности (ЧЛ) – впечатление на окружающих, имидж, внешние характеристики.</h3>
+        <p>{{results.CHL}} <span v-if="otherName">({{results.CHL2}})</span></p>
+        <h3>Управляющие Числа (УЧ)</h3>
+        <p>
+          <span v-for="(controlNumber, index) in results.controlNumbers">{{controlNumber}}<span v-if="index + 1 < results.controlNumbers.length">,</span></span>
+          <span v-if="otherName && results.controlNumbers2.length">
+            (<span v-for="(controlNumber, index) in results.controlNumbers2">{{controlNumber}}<span v-if="index + 1 < results.controlNumbers2.length">,</span></span>)
+          </span>
+        </p>
+        <h3>Кармические Числа (КЧ)</h3>
+        <p>
+          <span v-for="(karmicNumber, index) in results.karmicNumbers">{{karmicNumber}}<span v-if="index + 1 < results.karmicNumbers.length">,</span></span>
+          <span v-if="otherName && results.karmicNumbers2.length">
+            (<span v-for="(karmicNumber, index) in results.karmicNumbers2">{{karmicNumber}}<span v-if="index + 1 < results.karmicNumbers2.length">,</span></span>)
+          </span>
+        </p>
+      </template>
+
+    </div>
     </transition>
   </div>
   <script src="./script.js"></script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
