@@ -74,7 +74,7 @@ input[type="text"], input[type="date"] {
   border: solid 1px #d4d4d4;
   transition: border linear 0.2s, background-color linear 0.2s, color linear 0.2s;
   display: block;
-  width: -webkit-fill-available;
+  width: calc(100% - 18px);
   margin: 0 0 10px 0;
   -webkit-appearance: none;
 }
@@ -82,7 +82,7 @@ input[type="text"], input[type="date"] {
 .other-name-enter-active,
 .other-name-leave-active {
   transition: max-height 1s ease;
-  max-height: 192.5px;
+  max-height: 193px;
   overflow: hidden;
 }
 
@@ -94,13 +94,17 @@ input[type="text"], input[type="date"] {
 
 .input-block-enter-active,
 .input-block-leave-active {
-  transition: top ease .4s;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
+  transition: opacity linear .4s;
+  opacity: 1;
 }
 
 .input-block-enter,
 .input-block-leave-to {
-  top: -100%;
+  opacity: 0;
 }
 
 

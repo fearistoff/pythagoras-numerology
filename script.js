@@ -170,7 +170,7 @@ new Vue({
     }
   },
   mounted:function () {
-    for (letter in alphaNumbers) {
+    for (let letter in alphaNumbers) {
       this.letters.push(letter);
       this.letters.push(letter.toUpperCase());
     }
