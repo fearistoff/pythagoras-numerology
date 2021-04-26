@@ -207,6 +207,12 @@ new Vue({
         fatherVowels = this.vowelsOrConsonants(this.fathersName, this.results.fathersNameArray, true);
         fatherConsonants = this.vowelsOrConsonants(this.fathersName, this.results.fathersNameArray);
       }
+      if (this.watchDate) {
+        this.results.day = parseInt(this.date.split('-')[2]);
+        this.results.month = parseInt(this.date.split('-')[1]);
+        this.results.year = parseInt(this.date.split('-')[0]);
+      }
+      this.results.CHJP = this.splitAndAdd(this.splitAndAdd(this.results.day) + this.splitAndAdd(this.results.month) + this.splitAndAdd(this.results.year));
       if (this.otherName) {
         this.firstName2 = this.firstName2 !== "" ? this.firstName2 : this.firstName;
         this.secondName2 = this.secondName2 !== "" ? this.secondName2 : this.secondName;
@@ -240,14 +246,8 @@ new Vue({
           this.splitAndAdd(this.sunOfIntString(father2Consonants), true), true);
         this.results.CHR2 = this.splitAndAdd(this.results.CHJP + this.results.CHV2);
       }
-      if (this.watchDate) {
-        this.results.day = parseInt(this.date.split('-')[2]);
-        this.results.month = parseInt(this.date.split('-')[1]);
-        this.results.year = parseInt(this.date.split('-')[0]);
-      }
       this.results.CHDR = this.results.day;
       this.results.CHDR2 = this.splitAndAdd(this.results.day);
-      this.results.CHJP = this.splitAndAdd(this.splitAndAdd(this.results.day) + this.splitAndAdd(this.results.month) + this.splitAndAdd(this.results.year));
       this.results.CHV = this.splitAndAdd(
         this.splitAndAdd(this.sunOfIntString(this.results.firstNameArray))
         +

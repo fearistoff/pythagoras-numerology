@@ -11,12 +11,6 @@
   display: none;
 }
 
-#app {
-
-  height: 100vh;
-  overflow: auto;
-}
-
 b {
   color: #00865a;
 }
@@ -27,7 +21,6 @@ p {
 
 body {
   background-color: #ffffff;
-  overflow: hidden;
 }
 
 h1 {
