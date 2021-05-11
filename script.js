@@ -194,18 +194,18 @@ new Vue({
         father2Consonants;
       if (this.firstName !== '') {
         this.results.firstNameArray = this.stringToArray(this.firstName.trim());
-        firstVowels = this.vowelsOrConsonants(this.firstName, this.results.firstNameArray, true);
-        firstConsonants = this.vowelsOrConsonants(this.firstName, this.results.firstNameArray);
+        firstVowels = this.vowelsOrConsonants(this.firstName.trim().toLowerCase(), this.results.firstNameArray, true);
+        firstConsonants = this.vowelsOrConsonants(this.firstName.trim().toLowerCase(), this.results.firstNameArray);
       }
       if (this.secondName !== '') {
         this.results.secondNameArray = this.stringToArray(this.secondName.trim());
-        secondVowels = this.vowelsOrConsonants(this.secondName, this.results.secondNameArray, true);
-        secondConsonants = this.vowelsOrConsonants(this.secondName, this.results.secondNameArray);
+        secondVowels = this.vowelsOrConsonants(this.secondName.trim().toLowerCase(), this.results.secondNameArray, true);
+        secondConsonants = this.vowelsOrConsonants(this.secondName.trim().toLowerCase(), this.results.secondNameArray);
       }
       if (this.fathersName !== '') {
         this.results.fathersNameArray = this.stringToArray(this.fathersName.trim());
-        fatherVowels = this.vowelsOrConsonants(this.fathersName, this.results.fathersNameArray, true);
-        fatherConsonants = this.vowelsOrConsonants(this.fathersName, this.results.fathersNameArray);
+        fatherVowels = this.vowelsOrConsonants(this.fathersName.trim().toLowerCase(), this.results.fathersNameArray, true);
+        fatherConsonants = this.vowelsOrConsonants(this.fathersName.trim().toLowerCase(), this.results.fathersNameArray);
       }
       if (this.watchDate) {
         this.results.day = parseInt(this.date.split('-')[2]);
@@ -220,12 +220,12 @@ new Vue({
         this.results.firstName2Array = this.stringToArray(this.firstName2.trim());
         this.results.secondName2Array = this.stringToArray(this.secondName2.trim());
         this.results.fathersName2Array = this.stringToArray(this.fathersName2.trim());
-        first2Vowels = this.vowelsOrConsonants(this.firstName2, this.results.firstName2Array, true);
-        first2Consonants = this.vowelsOrConsonants(this.firstName2, this.results.firstName2Array);
-        second2Vowels = this.vowelsOrConsonants(this.secondName2, this.results.secondName2Array, true);
-        second2Consonants = this.vowelsOrConsonants(this.secondName2, this.results.secondName2Array);
-        father2Vowels = this.vowelsOrConsonants(this.fathersName2, this.results.fathersName2Array, true);
-        father2Consonants = this.vowelsOrConsonants(this.fathersName2, this.results.fathersName2Array);
+        first2Vowels = this.vowelsOrConsonants(this.firstName2.trim().toLowerCase(), this.results.firstName2Array, true);
+        first2Consonants = this.vowelsOrConsonants(this.firstName2.trim().toLowerCase(), this.results.firstName2Array);
+        second2Vowels = this.vowelsOrConsonants(this.secondName2.trim().toLowerCase(), this.results.secondName2Array, true);
+        second2Consonants = this.vowelsOrConsonants(this.secondName2.trim().toLowerCase(), this.results.secondName2Array);
+        father2Vowels = this.vowelsOrConsonants(this.fathersName2.trim().toLowerCase(), this.results.fathersName2Array, true);
+        father2Consonants = this.vowelsOrConsonants(this.fathersName2.trim().toLowerCase(), this.results.fathersName2Array);
         this.results.CHV2 = this.splitAndAdd(
           this.splitAndAdd(this.sunOfIntString(this.results.firstName2Array), true)
           +
