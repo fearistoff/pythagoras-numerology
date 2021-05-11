@@ -66,9 +66,9 @@
         </p>
         <h3 v-if="results.karmicNumbers.length || results.karmicNumbers2.length">Кармические Числа (КЧ)</h3>
         <p>
-          <span v-for="(karmicNumber, index) in results.karmicNumbers">{{karmicNumber}}<span v-if="index + 1 < results.karmicNumbers.length">,</span></span>
+          <span v-for="(karmicNumber, index) in results.karmicNumbers">{{karmicNumber}}<span v-if="index + 1 < results.karmicNumbers.length">, </span></span>
           <span v-if="otherName && results.karmicNumbers2.length">
-            (<span v-for="(karmicNumber, index) in results.karmicNumbers2">{{karmicNumber}}<span v-if="index + 1 < results.karmicNumbers2.length">,</span></span>)
+            (<span v-for="(karmicNumber, index) in results.karmicNumbers2">{{karmicNumber}}<span v-if="index + 1 < results.karmicNumbers2.length">, </span></span>)
           </span>
         </p>
       </template>
@@ -79,39 +79,3 @@
   <script src="./script.js"></script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
