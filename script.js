@@ -163,10 +163,10 @@ new Vue({
         if (!valid) {
           return false;
         }
-        return first && second && father && date && (first2 || second2 || father2);
+        return !!first && !!second && !!father && !!date && (!!first2 || !!second2 || !!father2);
       }
 
-      return first && second && father && date;
+      return !!first && !!second && !!father && !!date;
     }
   },
   mounted:function () {
