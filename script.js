@@ -167,6 +167,50 @@ new Vue({
       }
 
       return !!first && !!second && !!father && !!date;
+    },
+    controlNumbersString: function () {
+      let string = "";
+      this.results.controlNumbers.forEach((item, index) => {
+        if (!index) {
+          string = string + item;
+        } else {
+          string = string + ", " + item;
+        }
+      });
+      if (this.results.controlNumbers2.length) {
+        string = string + " ("
+        this.results.controlNumbers2.forEach((item, index2) => {
+          if (!index2) {
+            string = string + item;
+          } else {
+            string = string + ", " + item;
+          }
+        });
+        string = string + ")"
+      }
+      return string;
+    },
+    karmicNumbersString: function () {
+      let string = "";
+      this.results.karmicNumbers.forEach((item, index) => {
+        if (!index) {
+          string = string + item;
+        } else {
+          string = string + ", " + item;
+        }
+      });
+      if (this.results.karmicNumbers2.length) {
+        string = string + " ("
+        this.results.karmicNumbers2.forEach((item, index2) => {
+          if (!index2) {
+            string = string + item;
+          } else {
+            string = string + ", " + item;
+          }
+        });
+        string = string + ")"
+      }
+      return string;
     }
   },
   mounted:function () {

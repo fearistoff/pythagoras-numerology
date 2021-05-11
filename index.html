@@ -58,18 +58,12 @@
         <h3>Число Реализации (ЧР) – число истинного «Я», <b>конечная цель</b> деятельности, к чему стремится.</h3>
         <p>{{results.CHR}} <span v-if="otherName">({{results.CHR2}})</span></p>
         <h3 v-if="results.controlNumbers.length || results.controlNumbers2.length">Управляющие Числа (УЧ)</h3>
-        <p>
-          <span v-for="(controlNumber, index) in results.controlNumbers">{{controlNumber}}<span v-if="index + 1 < results.controlNumbers.length">,</span></span>
-          <span v-if="otherName && results.controlNumbers2.length">
-            (<span v-for="(controlNumber, index) in results.controlNumbers2">{{controlNumber}}<span v-if="index + 1 < results.controlNumbers2.length">,</span></span>)
-          </span>
+        <p v-if="results.controlNumbers.length || results.controlNumbers2.length">
+          {{controlNumbersString}}
         </p>
         <h3 v-if="results.karmicNumbers.length || results.karmicNumbers2.length">Кармические Числа (КЧ)</h3>
-        <p>
-          <span v-for="(karmicNumber, index) in results.karmicNumbers">{{karmicNumber}}<span v-if="index + 1 < results.karmicNumbers.length">, </span></span>
-          <span v-if="otherName && results.karmicNumbers2.length">
-            (<span v-for="(karmicNumber, index) in results.karmicNumbers2">{{karmicNumber}}<span v-if="index + 1 < results.karmicNumbers2.length">, </span></span>)
-          </span>
+        <p v-if="results.karmicNumbers.length || results.karmicNumbers2.length">
+          {{karmicNumbersString}}
         </p>
       </template>
 
