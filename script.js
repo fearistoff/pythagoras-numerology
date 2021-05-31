@@ -393,13 +393,13 @@ new Vue({
         this.log(`Конец разбора, возвращаем ${inNumber}`, "background-color: darkred");
         return inNumber;
       } else if (inNumber > 999) {
-        this.log(`Число разбито на ${Math.floor(inNumber / 1000)}, ${Math.floor((inNumber / 100) % 10)}, ${Math.floor((inNumber / 10) % 10)} и на ${Math.floor(inNumber % 10)}`)
+        this.log(`Число разбито на ${Math.floor(inNumber / 1000)}, ${Math.floor((inNumber / 100) % 10)}, ${Math.floor((inNumber / 10) % 10)} и ${Math.floor(inNumber % 10)}`)
         newNumber = Math.floor(inNumber / 1000) + Math.floor((inNumber / 100) % 10) + Math.floor((inNumber / 10) % 10) + Math.floor(inNumber % 10);
       } else if (inNumber > 99) {
-        this.log(`Число разбито на ${Math.floor((inNumber / 100) % 10)}, ${Math.floor((inNumber / 10) % 10)} и на ${Math.floor(inNumber % 10)}`)
+        this.log(`Число разбито на ${Math.floor((inNumber / 100) % 10)}, ${Math.floor((inNumber / 10) % 10)} и ${Math.floor(inNumber % 10)}`)
         newNumber = Math.floor((inNumber / 100) % 10) + Math.floor((inNumber / 10) % 10) + Math.floor(inNumber % 10);
       } else {
-        this.log(`Число разбито на ${Math.floor((inNumber / 10) % 10)} и на ${Math.floor(inNumber % 10)}`)
+        this.log(`Число разбито на ${Math.floor((inNumber / 10) % 10)} и ${Math.floor(inNumber % 10)}`)
         newNumber = Math.floor((inNumber / 10) % 10) + Math.floor(inNumber % 10);
       }
       return this.splitAndAdd(newNumber, secondary);
