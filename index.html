@@ -192,7 +192,7 @@
       >
         {{ karmicNumbersString }}
       </p>
-      <button v-if="results.ready" class="save-button" @click="saveLocally">Сохранить</button>
+      <button class="save-button m-button" @click="saveLocally">Сохранить</button>
       <div v-if="logString && isLogMode" v-html="logString"></div>
     </div>
   </transition>
