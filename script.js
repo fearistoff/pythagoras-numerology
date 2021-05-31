@@ -93,15 +93,15 @@ new Vue({
     letters: [],
     controlNumbers: [11, 22, 33],
     karmicNumbers: [10, 13, 14, 16, 19],
-    name: "Александр",
-    secondName: "Нилов",
-    patronymic: "Олегович",
-    date: "1993-09-15",
+    name: "",
+    secondName: "",
+    patronymic: "",
+    date: "2020-11-09",
     otherName: false,
     watchDate: true,
-    name2: "Александр",
-    secondName2: "Нилов",
-    patronymic2: "Олегович",
+    name2: "",
+    secondName2: "",
+    patronymic2: "",
     isLogMode: false,
     headerClickCounter: 0,
     headerClickTime: 0,
@@ -608,7 +608,7 @@ new Vue({
       this.name = "";
       this.secondName = "";
       this.patronymic = "";
-      this.date = "1993-09-15";
+      this.date = "2020-11-09";
       this.name2 = "";
       this.secondName2 = "";
       this.patronymic2 = "";
