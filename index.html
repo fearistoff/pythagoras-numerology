@@ -15,16 +15,27 @@
 </head>
 <body>
   <div id="app" v-cloak>
+    <button v-if="results.ready" @click="reset" class="reload-button">Сброс</button>
     <transition name="input-block" mode="in-out">
       <div v-if="!results.ready" class="input-block block-design">
         <h1>Пифагорейская нумерология</h1>
         <h3>Основное имя:</h3>
-        <input v-model="secondName" type="text" placeholder="Фамилия">
-        <input v-model="firstName" type="text" placeholder="Имя">
-        <input v-model="fathersName" type="text" placeholder="Отчество">
+        <label>
+          <input v-model="secondName" type="text" placeholder="Фамилия">
+        </label>
+        <label>
+          <input v-model="firstName" type="text" placeholder="Имя">
+        </label>
+        <label>
+          <input v-model="fathersName" type="text" placeholder="Отчество">
+        </label>
         <div class="date-input-container">
-          <input :class="{disabled: !watchDate}" :disabled="!watchDate" v-model="date" type="date" placeholder="Введите дату" value="2020-11-09" />
-          <input class="watch-date-checkbox" v-model="watchDate" type="checkbox" />
+          <label>
+            <input :class="{disabled: !watchDate}" :disabled="!watchDate" v-model="date" type="date" placeholder="Введите дату" value="1993-09-15" />
+          </label>
+          <label>
+            <input class="watch-date-checkbox" v-model="watchDate" type="checkbox" />
+          </label>
         </div>
         <label>
           <input v-model="otherName" type="checkbox"> Альтернативное имя
@@ -32,9 +43,15 @@
         <transition name="other-name">
           <div v-if="otherName">
             <h3>Альтернативное имя:</h3>
-            <input v-model="secondName2" type="text" placeholder="Фамилия">
-            <input v-model="firstName2" type="text" placeholder="Имя">
-            <input v-model="fathersName2" type="text" placeholder="Отчество">
+            <label>
+              <input v-model="secondName2" type="text" placeholder="Фамилия">
+            </label>
+            <label>
+              <input v-model="firstName2" type="text" placeholder="Имя">
+            </label>
+            <label>
+              <input v-model="fathersName2" type="text" placeholder="Отчество">
+            </label>
           </div>
         </transition>
         <div class="m-button" @click="countNumbers()" :class="{'m-button_disabled': !valid}">Посчитать</div>

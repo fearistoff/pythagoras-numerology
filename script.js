@@ -103,6 +103,12 @@ new Vue({
     CHR: 0,
     CHR2: 0
   },
+  mounted: function () {
+    for (let letter in alphaNumbers) {
+      this.letters.push(letter);
+      this.letters.push(letter.toUpperCase());
+    }
+  },
   computed: {
     valid: function () {
       const first = this.firstName.trim();
@@ -213,12 +219,6 @@ new Vue({
       return string;
     }
   },
-  mounted:function () {
-    for (let letter in alphaNumbers) {
-      this.letters.push(letter);
-      this.letters.push(letter.toUpperCase());
-    }
-  },
   methods: {
     countNumbers: function () {
       if (!this.valid) {
@@ -237,16 +237,25 @@ new Vue({
         second2Consonants,
         father2Consonants;
       if (this.firstName !== '') {
+        console.log("Считаем основную фамилию");
         this.results.firstNameArray = this.stringToArray(this.firstName.trim());
+        console.log(`Основа: ${this.results.firstNameArray}`);
         firstVowels = this.vowelsOrConsonants(this.firstName.trim().toLowerCase(), this.results.firstNameArray, true);
+        console.log(`Гласные: ${firstVowels}`);
         firstConsonants = this.vowelsOrConsonants(this.firstName.trim().toLowerCase(), this.results.firstNameArray);
+        console.log(`Согласные: ${firstConsonants}`);
       }
       if (this.secondName !== '') {
+        console.log("Считаем основное имя");
         this.results.secondNameArray = this.stringToArray(this.secondName.trim());
+        console.log(`Основа: ${this.results.secondNameArray}`);
         secondVowels = this.vowelsOrConsonants(this.secondName.trim().toLowerCase(), this.results.secondNameArray, true);
+        console.log(`Гласные: ${secondVowels}`);
         secondConsonants = this.vowelsOrConsonants(this.secondName.trim().toLowerCase(), this.results.secondNameArray);
+        console.log(`Согласные: ${secondConsonants}`);
       }
       if (this.fathersName !== '') {
+        console.log("Считаем основное отчество");
         this.results.fathersNameArray = this.stringToArray(this.fathersName.trim());
         fatherVowels = this.vowelsOrConsonants(this.fathersName.trim().toLowerCase(), this.results.fathersNameArray, true);
         fatherConsonants = this.vowelsOrConsonants(this.fathersName.trim().toLowerCase(), this.results.fathersNameArray);
@@ -256,7 +265,39 @@ new Vue({
         this.results.month = parseInt(this.date.split('-')[1]);
         this.results.year = parseInt(this.date.split('-')[0]);
       }
+      console.log("Считаем ЧЖП:");
       this.results.CHJP = this.splitAndAdd(this.splitAndAdd(this.results.day) + this.splitAndAdd(this.results.month) + this.splitAndAdd(this.results.year));
+      console.log(`${this.results.day} + ${this.results.month} + ${this.results.year} = ... = ${this.results.CHJP}`);
+      this.results.CHDR = this.results.day;
+      this.results.CHDR2 = this.splitAndAdd(this.results.day);
+      console.log(`Считаем ЧДР: ${this.results.CHDR} (${this.results.day} = ${this.results.CHDR2})`);
+      console.log("Считаем ЧВ (основное имя):");
+      this.results.CHV = this.splitAndAdd(
+        this.splitAndAdd(this.sunOfIntString(this.results.firstNameArray))
+        +
+        this.splitAndAdd(this.sunOfIntString(this.results.secondNameArray))
+        +
+        this.splitAndAdd(this.sunOfIntString(this.results.fathersNameArray)));
+      console.log(`${this.results.firstNameArray} + ${this.results.secondNameArray} + ${this.results.fathersNameArray} = ${this.sunOfIntString(this.results.firstNameArray)} + ${this.sunOfIntString(this.results.secondNameArray)} + ${this.sunOfIntString(this.results.fathersNameArray)} = ${this.results.CHV}`);
+      console.log("Считаем ЧД (основное имя):");
+      this.results.CHD = this.splitAndAdd(
+        this.splitAndAdd(this.sunOfIntString(firstVowels))
+        +
+        this.splitAndAdd(this.sunOfIntString(secondVowels))
+        +
+        this.splitAndAdd(this.sunOfIntString(fatherVowels)));
+      console.log(`${firstVowels} + ${secondVowels} + ${fatherVowels} = ${this.sunOfIntString(firstVowels)} + ${this.sunOfIntString(secondVowels)} + ${this.sunOfIntString(fatherVowels)} = ${this.results.CHD}`);
+      console.log("Считаем ЧЛ (основное имя):");
+      this.results.CHL = this.splitAndAdd(
+        this.splitAndAdd(this.sunOfIntString(firstConsonants))
+        +
+        this.splitAndAdd(this.sunOfIntString(secondConsonants))
+        +
+        this.splitAndAdd(this.sunOfIntString(fatherConsonants)));
+      console.log(`${firstConsonants} + ${secondConsonants} + ${fatherConsonants} = ${this.sunOfIntString(firstConsonants)} + ${this.sunOfIntString(secondConsonants)} + ${this.sunOfIntString(fatherConsonants)} = ${this.results.CHL}`);
+      console.log("Считаем ЧР (основное имя):");
+      this.results.CHR = this.splitAndAdd(this.results.CHJP + this.results.CHV);
+      console.log(`${this.results.CHJP} + ${this.results.CHV} = ... = ${this.results.CHR}`);
       if (this.otherName) {
         this.firstName2 = this.firstName2 !== "" ? this.firstName2 : this.firstName;
         this.secondName2 = this.secondName2 !== "" ? this.secondName2 : this.secondName;
@@ -270,13 +311,15 @@ new Vue({
         second2Consonants = this.vowelsOrConsonants(this.secondName2.trim().toLowerCase(), this.results.secondName2Array);
         father2Vowels = this.vowelsOrConsonants(this.fathersName2.trim().toLowerCase(), this.results.fathersName2Array, true);
         father2Consonants = this.vowelsOrConsonants(this.fathersName2.trim().toLowerCase(), this.results.fathersName2Array);
+        console.log("Считаем ЧВ (второе имя):");
         this.results.CHV2 = this.splitAndAdd(
           this.splitAndAdd(this.sunOfIntString(this.results.firstName2Array), true)
           +
           this.splitAndAdd(this.sunOfIntString(this.results.secondName2Array), true)
           +
           this.splitAndAdd(this.sunOfIntString(this.results.fathersName2Array), true), true);
-        this.results.CHD2 = this.splitAndAdd(
+        console.log(`${this.results.firstName2Array} + ${this.results.secondName2Array} + ${this.results.fathersName2Array} = ${this.sunOfIntString(this.results.firstName2Array)} + ${this.sunOfIntString(this.results.secondName2Array)} + ${this.sunOfIntString(this.results.fathersName2Array)} = ${this.results.CHV}`);
+        this.this.results.CHD2 = this.splitAndAdd(
           this.splitAndAdd(this.sunOfIntString(first2Vowels), true)
           +
           this.splitAndAdd(this.sunOfIntString(second2Vowels), true)
@@ -290,27 +333,6 @@ new Vue({
           this.splitAndAdd(this.sunOfIntString(father2Consonants), true), true);
         this.results.CHR2 = this.splitAndAdd(this.results.CHJP + this.results.CHV2);
       }
-      this.results.CHDR = this.results.day;
-      this.results.CHDR2 = this.splitAndAdd(this.results.day);
-      this.results.CHV = this.splitAndAdd(
-        this.splitAndAdd(this.sunOfIntString(this.results.firstNameArray))
-        +
-        this.splitAndAdd(this.sunOfIntString(this.results.secondNameArray))
-        +
-        this.splitAndAdd(this.sunOfIntString(this.results.fathersNameArray)));
-      this.results.CHD = this.splitAndAdd(
-        this.splitAndAdd(this.sunOfIntString(firstVowels))
-        +
-        this.splitAndAdd(this.sunOfIntString(secondVowels))
-        +
-        this.splitAndAdd(this.sunOfIntString(fatherVowels)));
-      this.results.CHL = this.splitAndAdd(
-        this.splitAndAdd(this.sunOfIntString(firstConsonants))
-        +
-        this.splitAndAdd(this.sunOfIntString(secondConsonants))
-        +
-        this.splitAndAdd(this.sunOfIntString(fatherConsonants)));
-      this.results.CHR = this.splitAndAdd(this.results.CHJP + this.results.CHV);
       this.results.ready = true;
 
     },
@@ -338,19 +360,24 @@ new Vue({
       return sum;
     },
     splitAndAdd: function (inNumber = 0, secondary = false) {
+      console.log(`Разбор числа ${inNumber}`);
       let newNumber;
       if (this.controlNumbers.includes(inNumber)) {
         if (secondary) {
+          console.log(`${inNumber} добавлен в список Управляющих чисел (второе имя)`);
           this.results.controlNumbers2.push(inNumber);
         } else {
+          console.log(`${inNumber} добавлен в список Управляющих чисел (основное имя)`);
           this.results.controlNumbers.push(inNumber);
         }
         return inNumber;
       }
       if (this.karmicNumbers.includes(inNumber)) {
         if (secondary) {
+          console.log(`${inNumber} добавлен в список Кармических чисел (второе имя)`);
           this.results.karmicNumbers2.push(inNumber);
         } else {
+          console.log(`${inNumber} добавлен в список Кармических чисел (основное имя)`);
           this.results.karmicNumbers.push(inNumber);
         }
       }
@@ -374,6 +401,45 @@ new Vue({
     },
     getNumberFromChar: function (char = "") {
       return alphaNumbers[char.toLowerCase()];
+    },
+    reset: function () {
+      this.results = {
+        firstNameArray: [],
+          secondNameArray: [],
+          fathersNameArray: [],
+          firstName2Array: [],
+          secondName2Array: [],
+          fathersName2Array: [],
+          day: 0,
+          month: 0,
+          year: 0,
+          ready: false,
+          controlNumbers: [],
+          controlNumbers2: [],
+          karmicNumbers: [],
+          karmicNumbers2: []
+      }
+      this.firstName = '';
+      this.secondName = '';
+      this.fathersName = '';
+      this.date = "1993-09-15";
+      this.firstName2 = '';
+      this.secondName2 = '';
+      this.fathersName2 = '';
+      this.otherName = false;
+      this.watchDate = true;
+      this.letters = [];
+      this.CHDR = 0;
+      this.CHDR2 = 0;
+      this.CHJP = 0;
+      this.CHV = 0;
+      this.CHV2 = 0;
+      this.CHD = 0;
+      this.CHD2 = 0;
+      this.CHL = 0;
+      this.CHL2 = 0;
+      this.CHR = 0;
+      this.CHR2 = 0;
     }
   }
 });

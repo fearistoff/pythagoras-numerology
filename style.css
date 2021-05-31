@@ -39,6 +39,18 @@ h3 {
   font-size: 17px;
 }
 
+.reload-button {
+    background-color: #00865a80;
+    border-radius: 15px;
+    position: fixed;
+    bottom: 5px;
+    right: 5px;
+    border: none;
+    font-size: 14px;
+    padding: 5px 10px;
+    font-weight: bold;
+}
+
 .block-design {
   background-color: #ffffff;
   border-radius: 15px;
@@ -150,6 +162,11 @@ input.disabled {
     background-color: #000000;
     color: #ffffff;
   }
+
+    .reload-button {
+        background-color: #9782ff80;
+        color: #ffffff;
+    }
 
   .block-design {
     background-color: #222222;
