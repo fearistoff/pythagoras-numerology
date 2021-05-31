@@ -93,19 +93,21 @@ new Vue({
     letters: [],
     controlNumbers: [11, 22, 33],
     karmicNumbers: [10, 13, 14, 16, 19],
-    name: "",
-    secondName: "",
-    patronymic: "",
+    name: "Александр",
+    secondName: "Нилов",
+    patronymic: "Олегович",
     date: "2020-11-09",
     otherName: false,
     watchDate: true,
-    name2: "",
-    secondName2: "",
-    patronymic2: "",
+    name2: "Александр",
+    secondName2: "Нилов",
+    patronymic2: "Олегович",
     isLogMode: false,
     headerClickCounter: 0,
     headerClickTime: 0,
-    logString: ""
+    logString: "",
+    savedList: [],
+    isSavedListShow: false
   },
   computed: {
     valid: function() {
@@ -228,6 +230,7 @@ new Vue({
       ...alphaNumbers.map(item => item.name),
       ...alphaNumbers.map(item => item.name.toUpperCase())
     ];
+    this.savedList = JSON.parse(localStorage.getItem("savedPeoples")) || [];
   },
   methods: {
     countNumbers: function() {
@@ -246,7 +249,6 @@ new Vue({
         first2Consonants,
         second2Consonants,
         father2Consonants;
-      if (this.name !== "") {
         this.log("Считаем основную фамилию", "color: #4040ff");
         this.results.nameArray = this.stringToArray(this.name.trim());
         this.log(`Основа: ${this.results.nameArray}`);
@@ -261,8 +263,6 @@ new Vue({
           this.results.nameArray
         );
         this.log(`Согласные: ${firstConsonants}`);
-      }
-      if (this.secondName !== "") {
         this.log("Считаем основное имя", "color: #4040ff");
         this.results.secondNameArray = this.stringToArray(
           this.secondName.trim()
@@ -279,8 +279,6 @@ new Vue({
           this.results.secondNameArray
         );
         this.log(`Согласные: ${secondConsonants}`);
-      }
-      if (this.patronymic !== "") {
         this.log("Считаем основное отчество", "color: #4040ff");
         this.results.patronymicArray = this.stringToArray(
           this.patronymic.trim()
@@ -297,7 +295,6 @@ new Vue({
           this.results.patronymicArray
         );
         this.log(`Согласные: ${fatherConsonants}`);
-      }
       if (this.watchDate) {
         this.results.day = parseInt(this.date.split("-")[2]);
         this.results.month = parseInt(this.date.split("-")[1]);
@@ -633,6 +630,43 @@ new Vue({
     },
     log: function(string = "", style) {
       this.logString += `<p class="log-line" style="${style}">${string}</p>`;
+    },
+    saveLocally: function () {
+      const value = {
+        header: `${this.secondName} ${this.name} ${this.patronymic}`,
+        name: this.name,
+        secondName: this.secondName,
+        patronymic: this.patronymic
+      }
+      if (this.otherName) {
+        value.name2 = this.name2;
+        value.secondName2 = this.secondName2;
+        value.patronymic2 = this.patronymic2;
+      }
+      if (this.watchDate) {
+        value.date = this.date;
+      }
+      const list = JSON.parse(localStorage.getItem("savedPeoples")) || [];
+      if (!list.find(item => item.header === value.header)) {
+        localStorage.setItem("savedPeoples", JSON.stringify([...list, value]));
+      }
+    },
+    loadSavedItem: function (item) {
+      this.name = item.name;
+      this.secondName = item.secondName;
+      this.patronymic = item.patronymic;
+      if (item.name2) {
+        this.name2 = item.name2;
+        this.secondName2 = item.secondName2;
+        this.patronymic2 = item.patronymic2;
+        this.otherName = true;
+      }
+      if (item.date) {
+        this.date = item.date;
+        this.watchDate = true;
+      }
+      this.countNumbers();
+      this.isSavedListShow = false;
     }
   }
 });

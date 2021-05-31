@@ -101,6 +101,21 @@
       >
         Посчитать
       </div>
+      <div
+        class="m-button"
+        @click="isSavedListShow = true"
+      >
+        Сохранённые
+      </div>
+    </div>
+  </transition>
+  <transition name="saved-list">
+    <div v-if="isSavedListShow" class="saved-list-container block-design">
+      <ul>
+        <li class="saved-list-item" v-for="savedItem in savedList" :key="savedItem.header" @click="loadSavedItem(savedItem)">
+          {{savedItem.header}}
+        </li>
+      </ul>
     </div>
   </transition>
   <transition name="fade" mode="in-out">
@@ -177,6 +192,7 @@
       >
         {{ karmicNumbersString }}
       </p>
+      <button v-if="results.ready" class="save-button" @click="saveLocally">Сохранить</button>
       <div v-if="logString && isLogMode" v-html="logString"></div>
     </div>
   </transition>
