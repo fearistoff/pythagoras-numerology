@@ -11,7 +11,7 @@
   display: none;
 }
 
-b {
+b, .painted {
   color: #00865a;
 }
 
@@ -27,6 +27,7 @@ h1 {
   text-align: center;
   font-size: 25px;
   margin-bottom: 10px;
+    user-select: none;
 }
 
 h2 {
@@ -157,6 +158,11 @@ input.disabled {
   padding: 10px;
 }
 
+.log-line {
+    color: #808080;
+    background-color: #222222;
+}
+
 @media (prefers-color-scheme: dark) {
   body {
     background-color: #000000;
@@ -182,7 +188,7 @@ input.disabled {
     background-color: #483d8b;
   }
 
-  b {
+  b, .painted {
     color: #9782ff;
   }
 
