@@ -190,7 +190,7 @@
       >
         {{ karmicNumbersString }}
       </p>
-      <div class="save-button m-button" @click="saveLocally">Сохранить</div>
+      <div class="save-button m-button" @click="saveLocally" :class="{'m-button_disabled': isSaved}">{{isSaved? 'Сохранено' : 'Сохранить'}}</div>
       <div class="reload-button m-button" @click="reset" >Сброс</div>
       <div v-if="logString && isLogMode" v-html="logString"></div>
     </div>

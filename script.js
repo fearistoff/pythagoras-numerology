@@ -93,9 +93,9 @@ new Vue({
     letters: [],
     controlNumbers: [11, 22, 33],
     karmicNumbers: [10, 13, 14, 16, 19],
-    name: "",
-    secondName: "",
-    patronymic: "",
+    name: "Александр",
+    secondName: "Нилов",
+    patronymic: "Олегович",
     date: "2020-11-09",
     otherName: false,
     watchDate: true,
@@ -223,6 +223,11 @@ new Vue({
         string = string + ")";
       }
       return string;
+    },
+    isSaved: function () {
+      if (this.savedList && this.secondName && this.name && this.patronymic) {
+        return !!this.savedList.find(item => item.header === `${this.secondName} ${this.name} ${this.patronymic}`);
+      }
     }
   },
   mounted: function() {
@@ -442,6 +447,7 @@ new Vue({
           this.results.CHJP + this.results.CHV2
         );
       }
+
       this.results.ready = true;
     },
     vowelsOrConsonants(string = "", array = [], vowels = false) {
@@ -575,43 +581,40 @@ new Vue({
       return alphaNumbers.find(item => item.name === char.toLowerCase()).number;
     },
     reset: function() {
-      this.results = {
-        nameArray: [],
-        secondNameArray: [],
-        patronymicArray: [],
-        name2Array: [],
-        secondName2Array: [],
-        patronymic2Array: [],
-        day: 0,
-        month: 0,
-        year: 0,
-        ready: false,
-        controlNumbers: [],
-        controlNumbers2: [],
-        karmicNumbers: [],
-        karmicNumbers2: [],
-        CHDR: 0,
-        CHDR2: 0,
-        CHJP: 0,
-        CHV: 0,
-        CHV2: 0,
-        CHD: 0,
-        CHD2: 0,
-        CHL: 0,
-        CHL2: 0,
-        CHR: 0,
-        CHR2: 0
-      };
-      this.name = "";
-      this.secondName = "";
-      this.patronymic = "";
-      this.date = "2020-11-09";
-      this.name2 = "";
-      this.secondName2 = "";
-      this.patronymic2 = "";
-      this.otherName = false;
-      this.watchDate = true;
-      this.letters = [];
+      Vue.set(this.results, "nameArray", []);
+      Vue.set(this.results, "secondNameArray", []);
+      Vue.set(this.results, "patronymicArray", []);
+      Vue.set(this.results, "name2Array", []);
+      Vue.set(this.results, "secondName2Array", []);
+      Vue.set(this.results, "patronymic2Array", []);
+      Vue.set(this.results, "controlNumbers", []);
+      Vue.set(this.results, "controlNumbers2", []);
+      Vue.set(this.results, "karmicNumbers", []);
+      Vue.set(this.results, "karmicNumbers2", []);
+      Vue.set(this.results, "ready", false);
+      Vue.set(this.results, "day", 0);
+      Vue.set(this.results, "month", 0);
+      Vue.set(this.results, "year", 0);
+      Vue.set(this.results, "CHDR", 0);
+      Vue.set(this.results, "CHDR2", 0);
+      Vue.set(this.results, "CHJP", 0);
+      Vue.set(this.results, "CHV", 0);
+      Vue.set(this.results, "CHV2", 0);
+      Vue.set(this.results, "CHD", 0);
+      Vue.set(this.results, "CHD2", 0);
+      Vue.set(this.results, "CHL", 0);
+      Vue.set(this.results, "CHL2", 0);
+      Vue.set(this.results, "CHR", 0);
+      Vue.set(this.results, "CHR2", 0);
+      Vue.set(this, "name", "");
+      Vue.set(this, "secondName", "");
+      Vue.set(this, "patronymic", "");
+      Vue.set(this, "date", "2020-11-09");
+      Vue.set(this, "name2", "");
+      Vue.set(this, "secondName2", "");
+      Vue.set(this, "patronymic2", "");
+      Vue.set(this, "otherName", false);
+      Vue.set(this, "watchDate", true);
     },
     clickHeader: function() {
       const now = new Date().getTime();
@@ -632,23 +635,24 @@ new Vue({
       this.logString += `<p class="log-line" style="${style}">${string}</p>`;
     },
     saveLocally: function () {
-      const value = {
-        header: `${this.secondName} ${this.name} ${this.patronymic}`,
-        name: this.name,
-        secondName: this.secondName,
-        patronymic: this.patronymic
-      }
-      if (this.otherName) {
-        value.name2 = this.name2;
-        value.secondName2 = this.secondName2;
-        value.patronymic2 = this.patronymic2;
-      }
-      if (this.watchDate) {
-        value.date = this.date;
-      }
-      const list = JSON.parse(localStorage.getItem("savedPeoples")) || [];
-      if (!list.find(item => item.header === value.header)) {
+      if (!this.isSaved) {
+        const value = {
+          header: `${this.secondName} ${this.name} ${this.patronymic}`,
+          name: this.name,
+          secondName: this.secondName,
+          patronymic: this.patronymic
+        }
+        if (this.otherName) {
+          value.name2 = this.name2;
+          value.secondName2 = this.secondName2;
+          value.patronymic2 = this.patronymic2;
+        }
+        if (this.watchDate) {
+          value.date = this.date;
+        }
+        const list = JSON.parse(localStorage.getItem("savedPeoples")) || [];
         localStorage.setItem("savedPeoples", JSON.stringify([...list, value]));
+        this.savedList = JSON.parse(localStorage.getItem("savedPeoples")) || [];
       }
     },
     loadSavedItem: function (item) {
@@ -667,6 +671,7 @@ new Vue({
       }
       this.countNumbers();
       this.isSavedListShow = false;
+
     }
   }
 });
