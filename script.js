@@ -93,10 +93,10 @@ new Vue({
     letters: [],
     controlNumbers: [11, 22, 33],
     karmicNumbers: [10, 13, 14, 16, 19],
-    name: "",
-    secondName: "",
-    patronymic: "",
-    date: "2020-11-09",
+    name: "Михаил",
+    secondName: "Сорокин",
+    patronymic: "Валерьевич",
+    date: "1987-12-11",
     otherName: false,
     watchDate: true,
     name2: "",
@@ -107,7 +107,18 @@ new Vue({
     headerClickTime: 0,
     logString: "",
     savedList: [],
-    isSavedListShow: false
+    isSavedListShow: false,
+    psycoMatrix: {
+      character: "",
+      energy: "",
+      interest: "",
+      health: "",
+      sex: "",
+      work: "",
+      luck: "",
+      duty: "",
+      intelligence: ""
+    }
   },
   computed: {
     valid: function() {
@@ -384,8 +395,77 @@ new Vue({
           this.results.CHJP + this.results.CHV2
         );
       }
+      let first = 0;
+      console.log(this.date);
+      const numberArray = this.getDateNumbers(this.date);
+      console.log(numberArray);
+      numberArray.forEach(item => {
+        first += item;
+      });
+      console.log(first);
+      const second = this.sumAndCheck(first);
+      console.log(second);
+      const third = Math.abs(first - numberArray[0]*2);
+      console.log(third);
+      const fourth = this.sumAndCheck(third);
+      console.log(fourth);
+      const fullNumberArray = [...numberArray.map(item => `${item}`), ...first.toString().split(''),...second.toString().split(''),...third.toString().split(''),...fourth.toString().split(''), ].join('');
+      console.log(fullNumberArray);
 
+      fullNumberArray.split('').forEach(item => {
+        if (item === "1") {
+          this.psycoMatrix.character = this.addItem(this.psycoMatrix.character, item);
+        } else if (item === "2") {
+          this.psycoMatrix.energy = this.addItem(this.psycoMatrix.energy, item);
+        } else if (item === "3") {
+          this.psycoMatrix.interest = this.addItem(this.psycoMatrix.interest, item);
+        } else if (item === "4") {
+          this.psycoMatrix.health = this.addItem(this.psycoMatrix.health, item);
+        } else if (item === "5") {
+          this.psycoMatrix.sex = this.addItem(this.psycoMatrix.sex, item);
+        } else if (item === "6") {
+          this.psycoMatrix.work = this.addItem(this.psycoMatrix.work, item);
+        } else if (item === "7") {
+          this.psycoMatrix.luck = this.addItem(this.psycoMatrix.luck, item);
+        } else if (item === "8") {
+          this.psycoMatrix.duty = this.addItem(this.psycoMatrix.duty, item);
+        } else if (item === "9") {
+          this.psycoMatrix.intelligence = this.addItem(this.psycoMatrix.intelligence, item);
+        }
+      });
+      
       this.results.ready = true;
+    },
+    addItem(mainString = "", cymbol = "") {
+        return `${mainString}${cymbol}`;
+    },
+    getDateNumbers(dateString = "") {
+      return dateString.split('-').map(item => {
+        if (item[0] === "0") {
+          return item[1];
+        }
+        return item;
+      }).reverse().join('').split('').map(item => parseInt(item));
+    },
+    sumAndCheck(number) {
+      if (number <= 12) {
+        return number;
+      } else if (number > 999) {
+        newNumber =
+          Math.floor(number / 1000) +
+          Math.floor((number / 100) % 10) +
+          Math.floor((number / 10) % 10) +
+          Math.floor(number % 10);
+      } else if (number > 99) {
+        newNumber =
+          Math.floor((number / 100) % 10) +
+          Math.floor((number / 10) % 10) +
+          Math.floor(number % 10);
+      } else {
+        newNumber =
+          Math.floor((number / 10) % 10) + Math.floor(number % 10);
+      }
+      return this.sumAndCheck(newNumber);
     },
     vowelsOrConsonants(string = "", array = [], vowels = false) {
       const vowelsList = [

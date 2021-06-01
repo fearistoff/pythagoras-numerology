@@ -191,10 +191,37 @@ input.disabled {
     text-overflow: ellipsis;
 }
 
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+}
+
+table {
+  padding: 2px;
+}
+
+.table-annotation {
+  font-size: 14px;
+  color: #808080;
+}
+
+.table-number {
+  font-size: 17px;
+}
+
+td {
+  border: 1px solid #000000;
+}
+
 @media (prefers-color-scheme: dark) {
   body {
     background-color: #000000;
     color: #ffffff;
+  }
+
+  td {
+    outline: 1px solid #ffffff;
+    padding: 5px;
   }
 
     .reload-button {

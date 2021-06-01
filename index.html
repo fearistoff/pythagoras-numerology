@@ -191,6 +191,89 @@
       >
         {{ karmicNumbersString }}
       </p>
+      <div class="table-container">
+        <table cellspacing="0" cellpadding="0">
+          <tr>
+            <td colspan="3"></td>
+            <td>
+              <p class="table-annotation">Темперамент</p>
+              <p class="table-number">{{psycoMatrix.interest.length + psycoMatrix.sex.length + psycoMatrix.luck.length || "-"}}</p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p class="table-annotation">Характер</p>
+              <p class="table-number">{{psycoMatrix.character || '-'}}</p>
+            </td>
+            <td>
+              <p class="table-annotation">Здоровье</p>
+              <p class="table-number">{{psycoMatrix.health || '-'}}</p>
+            </td>
+            <td>
+              <p class="table-annotation">Везение/удача</p>
+              <p class="table-number">{{psycoMatrix.luck || '-'}}</p>
+            </td>
+            <td>
+              <p class="table-annotation">Целеустремленность</p>
+              <p class="table-number">{{psycoMatrix.character.length + psycoMatrix.health.length + psycoMatrix.luck.length || '-'}}</p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p class="table-annotation">Энергия</p>
+              <p class="table-number">{{psycoMatrix.energy || '-'}}</p>
+            </td>
+            <td>
+              <p class="table-annotation">Мужское/Женское</p>
+              <p class="table-number">{{psycoMatrix.sex || '-'}}</p>
+            </td>
+            <td>
+              <p class="table-annotation">Долг</p>
+              <p class="table-number">{{psycoMatrix.duty || '-'}}</p>
+            </td>
+            <td>
+              <p class="table-annotation">Семья</p>
+              <p class="table-number">{{psycoMatrix.energy.length + psycoMatrix.sex.length + psycoMatrix.duty.length || '-'}}</p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p class="table-annotation">Интерес/энтузиазм</p>
+              <p class="table-number">{{psycoMatrix.interest || '-'}}</p>
+            </td>
+            <td>
+              <p class="table-annotation">Труд/Манипуляции</p>
+              <p class="table-number">{{psycoMatrix.work || '-'}}</p>
+            </td>
+            <td>
+              <p class="table-annotation">Интеллект</p>
+              <p class="table-number">{{psycoMatrix.intelligence || '-'}}</p>
+            </td>
+            <td>
+              <p class="table-annotation">Стабильность</p>
+              <p class="table-number">{{psycoMatrix.interest.length + psycoMatrix.work.length + psycoMatrix.intelligence.length || '-'}}</p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p class="table-annotation">Самооценка</p>
+              <p class="table-number">{{psycoMatrix.character.length + psycoMatrix.energy.length + psycoMatrix.interest.length || '-'}}</p>
+            </td>
+            <td>
+              <p class="table-annotation">Работа/Деньги</p>
+              <p class="table-number">{{psycoMatrix.health.length + psycoMatrix.sex.length + psycoMatrix.work.length || '-'}}</p>
+            </td>
+            <td>
+              <p class="table-annotation">Талант</p>
+              <p class="table-number">{{psycoMatrix.luck.length + psycoMatrix.duty.length + psycoMatrix.intelligence.length || '-'}}</p>
+            </td>
+            <td>
+              <p class="table-annotation">Духовность</p>
+              <p class="table-number">{{psycoMatrix.character.length + psycoMatrix.sex.length + psycoMatrix.intelligence.length || '-'}}</p>
+            </td>
+          </tr>
+        </table>
+      </div>
       <div class="save-button m-button" @click="saveLocally" :class="{'m-button_disabled': isSaved}">{{isSaved? 'Сохранено' : 'Сохранить'}}</div>
       <div class="reload-button m-button" @click="reset" >Сброс</div>
       <div v-if="logString && isLogMode" v-html="logString"></div>
