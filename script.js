@@ -93,9 +93,9 @@ new Vue({
     letters: [],
     controlNumbers: [11, 22, 33],
     karmicNumbers: [10, 13, 14, 16, 19],
-    name: "Александр",
-    secondName: "Нилов",
-    patronymic: "Олегович",
+    name: "",
+    secondName: "",
+    patronymic: "",
     date: "2020-11-09",
     otherName: false,
     watchDate: true,
@@ -254,119 +254,68 @@ new Vue({
         first2Consonants,
         second2Consonants,
         father2Consonants;
-        this.log("Считаем основную фамилию", "color: #4040ff");
         this.results.nameArray = this.stringToArray(this.name.trim());
-        this.log(`Основа: ${this.results.nameArray}`);
         firstVowels = this.vowelsOrConsonants(
           this.name.trim().toLowerCase(),
           this.results.nameArray,
           true
         );
-        this.log(`Гласные: ${firstVowels}`);
         firstConsonants = this.vowelsOrConsonants(
           this.name.trim().toLowerCase(),
           this.results.nameArray
         );
-        this.log(`Согласные: ${firstConsonants}`);
-        this.log("Считаем основное имя", "color: #4040ff");
         this.results.secondNameArray = this.stringToArray(
           this.secondName.trim()
         );
-        this.log(`Основа: ${this.results.secondNameArray}`);
         secondVowels = this.vowelsOrConsonants(
           this.secondName.trim().toLowerCase(),
           this.results.secondNameArray,
           true
         );
-        this.log(`Гласные: ${secondVowels}`);
         secondConsonants = this.vowelsOrConsonants(
           this.secondName.trim().toLowerCase(),
           this.results.secondNameArray
         );
-        this.log(`Согласные: ${secondConsonants}`);
-        this.log("Считаем основное отчество", "color: #4040ff");
         this.results.patronymicArray = this.stringToArray(
           this.patronymic.trim()
         );
-        this.log(`Основа: ${this.results.patronymicArray}`);
         fatherVowels = this.vowelsOrConsonants(
           this.patronymic.trim().toLowerCase(),
           this.results.patronymicArray,
           true
         );
-        this.log(`Гласные: ${fatherVowels}`);
         fatherConsonants = this.vowelsOrConsonants(
           this.patronymic.trim().toLowerCase(),
           this.results.patronymicArray
         );
-        this.log(`Согласные: ${fatherConsonants}`);
       if (this.watchDate) {
         this.results.day = parseInt(this.date.split("-")[2]);
         this.results.month = parseInt(this.date.split("-")[1]);
         this.results.year = parseInt(this.date.split("-")[0]);
-        this.log("Считаем ЧЖП:", "color: #4040ff");
         this.results.CHJP = this.splitAndAdd(
           this.splitAndAdd(this.results.day) +
           this.splitAndAdd(this.results.month) +
           this.splitAndAdd(this.results.year)
         );
-        this.log(
-          `${this.results.day} + ${this.results.month} + ${this.results.year} = ... = ${this.results.CHJP}`
-        );
         this.results.CHDR = this.results.day;
         this.results.CHDR2 = this.splitAndAdd(this.results.day);
-        this.log(
-          `Считаем ЧДР: ${this.results.CHDR} (${this.results.day} = ${this.results.CHDR2})`
-        );
       }
-      this.log("Считаем ЧВ (основное имя):", "color: #4040ff");
       this.results.CHV = this.splitAndAdd(
         this.splitAndAdd(this.sumOfIntString(this.results.nameArray)) +
         this.splitAndAdd(this.sumOfIntString(this.results.secondNameArray)) +
         this.splitAndAdd(this.sumOfIntString(this.results.patronymicArray))
       );
-      this.log(
-        `${this.results.nameArray} + ${this.results.secondNameArray} + ${
-          this.results.patronymicArray
-        } = ${this.sumOfIntString(
-          this.results.nameArray
-        )} + ${this.sumOfIntString(
-          this.results.secondNameArray
-        )} + ${this.sumOfIntString(this.results.patronymicArray)} = ${
-          this.results.CHV
-        }`
-      );
-      this.log("Считаем ЧД (основное имя):", "color: #4040ff");
       this.results.CHD = this.splitAndAdd(
         this.splitAndAdd(this.sumOfIntString(firstVowels)) +
         this.splitAndAdd(this.sumOfIntString(secondVowels)) +
         this.splitAndAdd(this.sumOfIntString(fatherVowels))
       );
-      this.log(
-        `${firstVowels} + ${secondVowels} + ${fatherVowels} = ${this.sumOfIntString(
-          firstVowels
-        )} + ${this.sumOfIntString(secondVowels)} + ${this.sumOfIntString(
-          fatherVowels
-        )} = ${this.results.CHD}`
-      );
-      this.log("Считаем ЧЛ (основное имя):", "color: #4040ff");
       this.results.CHL = this.splitAndAdd(
         this.splitAndAdd(this.sumOfIntString(firstConsonants)) +
         this.splitAndAdd(this.sumOfIntString(secondConsonants)) +
         this.splitAndAdd(this.sumOfIntString(fatherConsonants))
       );
-      this.log(
-        `${firstConsonants} + ${secondConsonants} + ${fatherConsonants} = ${this.sumOfIntString(
-          firstConsonants
-        )} + ${this.sumOfIntString(secondConsonants)} + ${this.sumOfIntString(
-          fatherConsonants
-        )} = ${this.results.CHL}`
-      );
-      this.log("Считаем ЧР (основное имя):", "color: #4040ff");
       this.results.CHR = this.splitAndAdd(this.results.CHJP + this.results.CHV);
-      this.log(
-        `${this.results.CHJP} + ${this.results.CHV} = ... = ${this.results.CHR}`
-      );
       if (this.otherName) {
         this.name2 = this.name2 !== "" ? this.name2 : this.name;
         this.secondName2 =
@@ -407,7 +356,6 @@ new Vue({
           this.patronymic2.trim().toLowerCase(),
           this.results.patronymic2Array
         );
-        this.log("Считаем ЧВ (второе имя):", "color: #4040ff");
         this.results.CHV2 = this.splitAndAdd(
           this.splitAndAdd(this.sumOfIntString(this.results.name2Array), true) +
           this.splitAndAdd(
@@ -419,17 +367,6 @@ new Vue({
             true
           ),
           true
-        );
-        this.log(
-          `${this.results.name2Array} + ${this.results.secondName2Array} + ${
-            this.results.patronymic2Array
-          } = ${this.sumOfIntString(
-            this.results.name2Array
-          )} + ${this.sumOfIntString(
-            this.results.secondName2Array
-          )} + ${this.sumOfIntString(this.results.patronymic2Array)} = ${
-            this.results.CHV
-          }`
         );
         this.results.CHD2 = this.splitAndAdd(
           this.splitAndAdd(this.sumOfIntString(first2Vowels), true) +
@@ -493,78 +430,36 @@ new Vue({
       return sum;
     },
     splitAndAdd: function(inNumber = 0, secondary = false) {
-      this.log(`Разбор числа ${inNumber}`, "color: yellow");
       let newNumber;
       if (this.controlNumbers.includes(inNumber)) {
         if (secondary) {
-          this.log(
-            `${inNumber} добавлен в список Управляющих чисел (второе имя)`,
-            "color: red"
-          );
           this.results.controlNumbers2.push(inNumber);
         } else {
-          this.log(
-            `${inNumber} добавлен в список Управляющих чисел (основное имя)`,
-            "color: red"
-          );
           this.results.controlNumbers.push(inNumber);
         }
-        this.log(
-          `Управляющее число, возвращаем ${inNumber}`,
-          "background-color: darkred"
-        );
         return inNumber;
       }
       if (this.karmicNumbers.includes(inNumber)) {
         if (secondary) {
-          this.log(
-            `${inNumber} добавлен в список Кармических чисел (второе имя)`,
-            "color: orange"
-          );
           this.results.karmicNumbers2.push(inNumber);
         } else {
-          this.log(
-            `${inNumber} добавлен в список Кармических чисел (основное имя)`,
-            "color: orange"
-          );
           this.results.karmicNumbers.push(inNumber);
         }
       }
       if (inNumber < 10) {
-        this.log(
-          `Конец разбора, возвращаем ${inNumber}`,
-          "background-color: darkred"
-        );
         return inNumber;
       } else if (inNumber > 999) {
-        this.log(
-          `Число разбито на ${Math.floor(inNumber / 1000)}, ${Math.floor(
-            (inNumber / 100) % 10
-          )}, ${Math.floor((inNumber / 10) % 10)} и ${Math.floor(
-            inNumber % 10
-          )}`
-        );
         newNumber =
           Math.floor(inNumber / 1000) +
           Math.floor((inNumber / 100) % 10) +
           Math.floor((inNumber / 10) % 10) +
           Math.floor(inNumber % 10);
       } else if (inNumber > 99) {
-        this.log(
-          `Число разбито на ${Math.floor((inNumber / 100) % 10)}, ${Math.floor(
-            (inNumber / 10) % 10
-          )} и ${Math.floor(inNumber % 10)}`
-        );
         newNumber =
           Math.floor((inNumber / 100) % 10) +
           Math.floor((inNumber / 10) % 10) +
           Math.floor(inNumber % 10);
       } else {
-        this.log(
-          `Число разбито на ${Math.floor((inNumber / 10) % 10)} и ${Math.floor(
-            inNumber % 10
-          )}`
-        );
         newNumber =
           Math.floor((inNumber / 10) % 10) + Math.floor(inNumber % 10);
       }
@@ -632,9 +527,6 @@ new Vue({
         this.headerClickCounter = 0;
         this.headerClickTime = now;
       }
-    },
-    log: function(string = "", style) {
-      this.logString += `<p class="log-line" style="${style}">${string}</p>`;
     },
     saveLocally: function () {
       if (!this.isSaved) {
