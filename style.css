@@ -116,8 +116,6 @@ input[type="text"], input[type="date"] {
   opacity: 0;
 }
 
-
-
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity linear .4s;
@@ -127,6 +125,19 @@ input[type="text"], input[type="date"] {
 .fade-enter,
 .fade-leave-to {
   opacity: 0;
+}
+
+.saved-list-enter-active,
+.saved-list-leave-active {
+    transition: opacity linear .4s, transform ease .4s;
+    opacity:1;
+    transform: translateY(0);
+}
+
+.saved-list-enter,
+.saved-list-leave-to {
+    opacity: 0;
+    transform: translateY(100%);
 }
 
 .input-block {
@@ -161,10 +172,15 @@ input.disabled {
 
 .saved-list-container {
     position: fixed;
-    top: 5px;
-    bottom: 5px;
-    left: 5px;
-    right: 5px;
+    top: 10px;
+    bottom: 10px;
+    left: 10px;
+    right: 10px;
+    overflow: auto;
+}
+
+.saved-list-list {
+    height: calc(100% - 50px);
     overflow: auto;
 }
 
@@ -211,9 +227,4 @@ input.disabled {
   .m-button:hover {
     background-color: #7365d3;
   }
-
-    .saved-list-container {
-        background-color: #222222;
-
-    }
 }

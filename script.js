@@ -581,40 +581,42 @@ new Vue({
       return alphaNumbers.find(item => item.name === char.toLowerCase()).number;
     },
     reset: function() {
-      Vue.set(this.results, "nameArray", []);
-      Vue.set(this.results, "secondNameArray", []);
-      Vue.set(this.results, "patronymicArray", []);
-      Vue.set(this.results, "name2Array", []);
-      Vue.set(this.results, "secondName2Array", []);
-      Vue.set(this.results, "patronymic2Array", []);
-      Vue.set(this.results, "controlNumbers", []);
-      Vue.set(this.results, "controlNumbers2", []);
-      Vue.set(this.results, "karmicNumbers", []);
-      Vue.set(this.results, "karmicNumbers2", []);
-      Vue.set(this.results, "ready", false);
-      Vue.set(this.results, "day", 0);
-      Vue.set(this.results, "month", 0);
-      Vue.set(this.results, "year", 0);
-      Vue.set(this.results, "CHDR", 0);
-      Vue.set(this.results, "CHDR2", 0);
-      Vue.set(this.results, "CHJP", 0);
-      Vue.set(this.results, "CHV", 0);
-      Vue.set(this.results, "CHV2", 0);
-      Vue.set(this.results, "CHD", 0);
-      Vue.set(this.results, "CHD2", 0);
-      Vue.set(this.results, "CHL", 0);
-      Vue.set(this.results, "CHL2", 0);
-      Vue.set(this.results, "CHR", 0);
-      Vue.set(this.results, "CHR2", 0);
-      Vue.set(this, "name", "");
-      Vue.set(this, "secondName", "");
-      Vue.set(this, "patronymic", "");
-      Vue.set(this, "date", "2020-11-09");
-      Vue.set(this, "name2", "");
-      Vue.set(this, "secondName2", "");
-      Vue.set(this, "patronymic2", "");
-      Vue.set(this, "otherName", false);
-      Vue.set(this, "watchDate", true);
+      this.results = {
+        nameArray: [],
+          secondNameArray: [],
+          patronymicArray: [],
+          name2Array: [],
+          secondName2Array: [],
+          patronymic2Array: [],
+          day: 0,
+          month: 0,
+          year: 0,
+          ready: false,
+          controlNumbers: [],
+          controlNumbers2: [],
+          karmicNumbers: [],
+          karmicNumbers2: [],
+          CHDR: 0,
+          CHDR2: 0,
+          CHJP: 0,
+          CHV: 0,
+          CHV2: 0,
+          CHD: 0,
+          CHD2: 0,
+          CHL: 0,
+          CHL2: 0,
+          CHR: 0,
+          CHR2: 0
+      };
+      this.name = "";
+        this.secondName = "";
+        this.patronymic = "";
+        this.date = "2020-11-09";
+        this.otherName = false;
+        this.watchDate = true;
+        this.name2 = "";
+        this.secondName2 = "";
+        this.patronymic2 = "";
     },
     clickHeader: function() {
       const now = new Date().getTime();

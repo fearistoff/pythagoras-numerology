@@ -109,11 +109,12 @@
   </transition>
   <transition name="saved-list">
     <div v-if="isSavedListShow" class="saved-list-container block-design">
-      <ul>
+      <ul class="saved-list-list">
         <li class="saved-list-item" v-for="savedItem in savedList" :key="savedItem.header" @click="loadSavedItem(savedItem)">
           {{savedItem.header}}
         </li>
       </ul>
+      <div class="m-button" @click="isSavedListShow = false">Закрыть</div>
     </div>
   </transition>
   <transition name="fade" mode="in-out">
