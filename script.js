@@ -592,6 +592,17 @@ new Vue({
         this.name2 = "";
         this.secondName2 = "";
         this.patronymic2 = "";
+        this.psycoMatrix = {
+          character: "",
+          energy: "",
+          interest: "",
+          health: "",
+          sex: "",
+          work: "",
+          luck: "",
+          duty: "",
+          intelligence: ""
+        }
     },
     clickHeader: function() {
       const now = new Date().getTime();
