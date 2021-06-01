@@ -32,9 +32,6 @@
 </head>
 <body>
 <div id="app" v-cloak>
-  <button v-if="results.ready" @click="reset" class="reload-button">
-    Сброс
-  </button>
   <transition name="input-block" mode="in-out">
     <div v-if="!results.ready" class="input-block block-design">
       <h1 @click="clickHeader" :class="{ painted: isLogMode }">
@@ -102,6 +99,7 @@
         Посчитать
       </div>
       <div
+        v-if="savedList.length"
         class="m-button"
         @click="isSavedListShow = true"
       >
@@ -192,7 +190,8 @@
       >
         {{ karmicNumbersString }}
       </p>
-      <button v-if="results.ready" class="save-button" @click="saveLocally">Сохранить</button>
+      <div class="save-button m-button" @click="saveLocally">Сохранить</div>
+      <div class="reload-button m-button" @click="reset" >Сброс</div>
       <div v-if="logString && isLogMode" v-html="logString"></div>
     </div>
   </transition>
