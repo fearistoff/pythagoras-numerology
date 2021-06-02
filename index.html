@@ -124,210 +124,237 @@
     </div>
   </transition>
   <transition name="fade" mode="in-out">
-    <div v-if="results.ready" class="results" ref="results">
-      <h3>ФИО, ДР/ Характеристика</h3>
-      <p>
-        {{ name }} {{ secondName }} {{ patronymic
-        }}<span v-if="otherName">
+    <div v-if="results.ready" class="results">
+      <div ref="results">
+        <h3>ФИО, ДР/ Характеристика</h3>
+        <p>
+          {{ name }} {{ secondName }} {{ patronymic
+          }}<span v-if="otherName">
               ({{ name2 }} {{ secondName2 }} {{ patronymic2 }})</span
-      ><span class="date" v-if="watchDate"
-      >, {{ results.day }}.{{ results.month }}.{{ results.year }}</span
-      >
-      </p>
-      <template v-if="watchDate">
+        ><span class="date" v-if="watchDate"
+        >, {{ results.day }}.{{ results.month }}.{{ results.year }}</span
+        >
+        </p>
+        <template v-if="watchDate">
+          <h3>
+            Число Дня Рождения (ЧДР) – <b>как</b>, каким образом двигается по
+            жизни.
+          </h3>
+          <p>{{ results.CHDR }}/{{ results.CHDR2 }}</p>
+          <h3>
+            Число Жизненного Пути (ЧЖП) – <b>что</b> делает. Основная задача в
+            жизни, путь, по которому идет.
+          </h3>
+          <p>{{ results.CHJP }}</p>
+        </template>
         <h3>
-          Число Дня Рождения (ЧДР) – <b>как</b>, каким образом двигается по
-          жизни.
+          Число Выражения (ЧВ) – ведущие <b>черты характера</b> и поведения.
         </h3>
-        <p>{{ results.CHDR }}/{{ results.CHDR2 }}</p>
+        <p>
+          {{ results.CHV }} <span v-if="otherName">({{ results.CHV2 }})</span>
+        </p>
         <h3>
-          Число Жизненного Пути (ЧЖП) – <b>что</b> делает. Основная задача в
-          жизни, путь, по которому идет.
+          Число Души (ЧД) – внутренние <b>мотивы</b>, истинные желания, порывы
+          души, направление духовного развития.
         </h3>
-        <p>{{ results.CHJP }}</p>
-      </template>
-      <h3>
-        Число Выражения (ЧВ) – ведущие <b>черты характера</b> и поведения.
-      </h3>
-      <p>
-        {{ results.CHV }} <span v-if="otherName">({{ results.CHV2 }})</span>
-      </p>
-      <h3>
-        Число Души (ЧД) – внутренние <b>мотивы</b>, истинные желания, порывы
-        души, направление духовного развития.
-      </h3>
-      <p>
-        {{ results.CHD }} <span v-if="otherName">({{ results.CHD2 }})</span>
-      </p>
-      <h3>
-        Число Личности (ЧЛ) – впечатление на окружающих, <b>имидж</b>,
-        внешние характеристики.
-      </h3>
-      <p>
-        {{ results.CHL }} <span v-if="otherName">({{ results.CHL2 }})</span>
-      </p>
-      <h3>
-        Число Реализации (ЧР) – число истинного «Я»,
-        <b>конечная цель</b> деятельности, к чему стремится.
-      </h3>
-      <p>
-        {{ results.CHR }} <span v-if="otherName">({{ results.CHR2 }})</span>
-      </p>
-      <h3
-        v-if="
+        <p>
+          {{ results.CHD }} <span v-if="otherName">({{ results.CHD2 }})</span>
+        </p>
+        <h3>
+          Число Личности (ЧЛ) – впечатление на окружающих, <b>имидж</b>,
+          внешние характеристики.
+        </h3>
+        <p>
+          {{ results.CHL }} <span v-if="otherName">({{ results.CHL2 }})</span>
+        </p>
+        <h3>
+          Число Реализации (ЧР) – число истинного «Я»,
+          <b>конечная цель</b> деятельности, к чему стремится.
+        </h3>
+        <p>
+          {{ results.CHR }} <span v-if="otherName">({{ results.CHR2 }})</span>
+        </p>
+        <h3
+          v-if="
               results.controlNumbers.length || results.controlNumbers2.length
             "
-      >
-        Управляющие Числа (УЧ)
-      </h3>
-      <p
-        v-if="
+        >
+          Управляющие Числа (УЧ)
+        </h3>
+        <p
+          v-if="
               results.controlNumbers.length || results.controlNumbers2.length
             "
-      >
-        {{ controlNumbersString }}
-      </p>
-      <h3
-        v-if="results.karmicNumbers.length || results.karmicNumbers2.length"
-      >
-        Кармические Числа (КЧ)
-      </h3>
-      <p
-        v-if="results.karmicNumbers.length || results.karmicNumbers2.length"
-      >
-        {{ karmicNumbersString }}
-      </p>
-      <h3>Психоматрица</h3>
-      <p>{{psycoMatrix.firstRow}}</p>
-      <p>{{psycoMatrix.secondRow}}</p>
-      <div class="table-container">
-        <table cellspacing="0" cellpadding="0"  class="psycho-matrix-table">
-          <tr>
-            <td colspan="3">
-            </td>
-            <td>
-              <p class="table-annotation">Темперамент</p>
-              <p class="table-number">{{psycoMatrix.interest.length + psycoMatrix.sex.length + psycoMatrix.luck.length || "-"}}</p>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <p class="table-annotation">Характер</p>
-              <p class="table-number">{{psycoMatrix.character || '-'}}</p>
-            </td>
-            <td>
-              <p class="table-annotation">Здоровье</p>
-              <p class="table-number">{{psycoMatrix.health || '-'}}</p>
-            </td>
-            <td>
-              <p class="table-annotation">Везение/удача</p>
-              <p class="table-number">{{psycoMatrix.luck || '-'}}</p>
-            </td>
-            <td>
-              <p class="table-annotation">Целеустремленность</p>
-              <p class="table-number">{{psycoMatrix.character.length + psycoMatrix.health.length + psycoMatrix.luck.length || '-'}}</p>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <p class="table-annotation">Энергия</p>
-              <p class="table-number">{{psycoMatrix.energy || '-'}}</p>
-            </td>
-            <td>
-              <p class="table-annotation">Мужское/Женское</p>
-              <p class="table-number">{{psycoMatrix.sex || '-'}}</p>
-            </td>
-            <td>
-              <p class="table-annotation">Долг</p>
-              <p class="table-number">{{psycoMatrix.duty || '-'}}</p>
-            </td>
-            <td>
-              <p class="table-annotation">Семья</p>
-              <p class="table-number">{{psycoMatrix.energy.length + psycoMatrix.sex.length + psycoMatrix.duty.length || '-'}}</p>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <p class="table-annotation">Интерес/энтузиазм</p>
-              <p class="table-number">{{psycoMatrix.interest || '-'}}</p>
-            </td>
-            <td>
-              <p class="table-annotation">Труд/Манипуляции</p>
-              <p class="table-number">{{psycoMatrix.work || '-'}}</p>
-            </td>
-            <td>
-              <p class="table-annotation">Интеллект</p>
-              <p class="table-number">{{psycoMatrix.intelligence || '-'}}</p>
-            </td>
-            <td>
-              <p class="table-annotation">Стабильность</p>
-              <p class="table-number">{{psycoMatrix.interest.length + psycoMatrix.work.length + psycoMatrix.intelligence.length || '-'}}</p>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <p class="table-annotation">Самооценка</p>
-              <p class="table-number">{{psycoMatrix.character.length + psycoMatrix.energy.length + psycoMatrix.interest.length || '-'}}</p>
-            </td>
-            <td>
-              <p class="table-annotation">Работа/Деньги</p>
-              <p class="table-number">{{psycoMatrix.health.length + psycoMatrix.sex.length + psycoMatrix.work.length || '-'}}</p>
-            </td>
-            <td>
-              <p class="table-annotation">Талант</p>
-              <p class="table-number">{{psycoMatrix.luck.length + psycoMatrix.duty.length + psycoMatrix.intelligence.length || '-'}}</p>
-            </td>
-            <td>
-              <p class="table-annotation">Духовность</p>
-              <p class="table-number">{{psycoMatrix.character.length + psycoMatrix.sex.length + psycoMatrix.intelligence.length || '-'}}</p>
-            </td>
-          </tr>
-        </table>
-        <h3>Карта инклюзий</h3>
-        <table class="inclution-table">
-          <tr>
-            <td>
-              <p class="table-annotation">1</p>
-              <p class="table-number">{{inclution[0] || '-'}}</p>
-            </td>
-            <td>
-              <p class="table-annotation">4</p>
-              <p class="table-number">{{inclution[3] || '-'}}</p>
-            </td>
-            <td>
-              <p class="table-annotation">7</p>
-              <p class="table-number">{{inclution[6] || '-'}}</p>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <p class="table-annotation">2</p>
-              <p class="table-number">{{inclution[1] || '-'}}</p>
-            </td>
-            <td>
-              <p class="table-annotation">5</p>
-              <p class="table-number">{{inclution[4] || '-'}}</p>
-            </td>
-            <td>
-              <p class="table-annotation">8</p>
-              <p class="table-number">{{inclution[7] || '-'}}</p>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <p class="table-annotation">3</p>
-              <p class="table-number">{{inclution[2] || '-'}}</p>
-            </td>
-            <td>
-              <p class="table-annotation">6</p>
-              <p class="table-number">{{inclution[5] || '-'}}</p>
-            </td>
-            <td>
-              <p class="table-annotation">9</p>
-              <p class="table-number">{{inclution[8] || '-'}}</p>
-            </td>
-          </tr>
-        </table>
+        >
+          {{ controlNumbersString }}
+        </p>
+        <h3
+          v-if="results.karmicNumbers.length || results.karmicNumbers2.length"
+        >
+          Кармические Числа (КЧ)
+        </h3>
+        <p
+          v-if="results.karmicNumbers.length || results.karmicNumbers2.length"
+        >
+          {{ karmicNumbersString }}
+        </p>
+        <div v-if="watchDate">
+          <h3>Психоматрица</h3>
+          <p>{{psycoMatrix.firstRow}}</p>
+          <p>{{psycoMatrix.secondRow}}</p>
+          <div class="table-container">
+            <table cellspacing="0" cellpadding="0"  class="psycho-matrix-table">
+              <tr>
+                <td colspan="3">
+                </td>
+                <td>
+                  <p class="table-annotation">Темперамент</p>
+                  <p class="table-number">{{psycoMatrix.interest.length + psycoMatrix.sex.length + psycoMatrix.luck.length || "-"}}</p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p class="table-annotation">Характер</p>
+                  <p class="table-number">{{psycoMatrix.character || '-'}}</p>
+                </td>
+                <td>
+                  <p class="table-annotation">Здоровье</p>
+                  <p class="table-number">{{psycoMatrix.health || '-'}}</p>
+                </td>
+                <td>
+                  <p class="table-annotation">Везение/удача</p>
+                  <p class="table-number">{{psycoMatrix.luck || '-'}}</p>
+                </td>
+                <td>
+                  <p class="table-annotation">Целеустремленность</p>
+                  <p class="table-number">{{psycoMatrix.character.length + psycoMatrix.health.length + psycoMatrix.luck.length || '-'}}</p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p class="table-annotation">Энергия</p>
+                  <p class="table-number">{{psycoMatrix.energy || '-'}}</p>
+                </td>
+                <td>
+                  <p class="table-annotation">Мужское/Женское</p>
+                  <p class="table-number">{{psycoMatrix.sex || '-'}}</p>
+                </td>
+                <td>
+                  <p class="table-annotation">Долг</p>
+                  <p class="table-number">{{psycoMatrix.duty || '-'}}</p>
+                </td>
+                <td>
+                  <p class="table-annotation">Семья</p>
+                  <p class="table-number">{{psycoMatrix.energy.length + psycoMatrix.sex.length + psycoMatrix.duty.length || '-'}}</p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p class="table-annotation">Интерес/энтузиазм</p>
+                  <p class="table-number">{{psycoMatrix.interest || '-'}}</p>
+                </td>
+                <td>
+                  <p class="table-annotation">Труд/Манипуляции</p>
+                  <p class="table-number">{{psycoMatrix.work || '-'}}</p>
+                </td>
+                <td>
+                  <p class="table-annotation">Интеллект</p>
+                  <p class="table-number">{{psycoMatrix.intelligence || '-'}}</p>
+                </td>
+                <td>
+                  <p class="table-annotation">Стабильность</p>
+                  <p class="table-number">{{psycoMatrix.interest.length + psycoMatrix.work.length + psycoMatrix.intelligence.length || '-'}}</p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p class="table-annotation">Самооценка</p>
+                  <p class="table-number">{{psycoMatrix.character.length + psycoMatrix.energy.length + psycoMatrix.interest.length || '-'}}</p>
+                </td>
+                <td>
+                  <p class="table-annotation">Работа/Деньги</p>
+                  <p class="table-number">{{psycoMatrix.health.length + psycoMatrix.sex.length + psycoMatrix.work.length || '-'}}</p>
+                </td>
+                <td>
+                  <p class="table-annotation">Талант</p>
+                  <p class="table-number">{{psycoMatrix.luck.length + psycoMatrix.duty.length + psycoMatrix.intelligence.length || '-'}}</p>
+                </td>
+                <td>
+                  <p class="table-annotation">Духовность</p>
+                  <p class="table-number">{{psycoMatrix.character.length + psycoMatrix.sex.length + psycoMatrix.intelligence.length || '-'}}</p>
+                </td>
+              </tr>
+            </table>
+            <h3>Карта инклюзий</h3>
+            <table class="inclution-table">
+              <tr>
+                <td>
+                  <p class="table-annotation">1</p>
+                  <p class="table-number">{{inclution[0] || '-'}}</p>
+                </td>
+                <td>
+                  <p class="table-annotation">4</p>
+                  <p class="table-number">{{inclution[3] || '-'}}</p>
+                </td>
+                <td>
+                  <p class="table-annotation">7</p>
+                  <p class="table-number">{{inclution[6] || '-'}}</p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p class="table-annotation">2</p>
+                  <p class="table-number">{{inclution[1] || '-'}}</p>
+                </td>
+                <td>
+                  <p class="table-annotation">5</p>
+                  <p class="table-number">{{inclution[4] || '-'}}</p>
+                </td>
+                <td>
+                  <p class="table-annotation">8</p>
+                  <p class="table-number">{{inclution[7] || '-'}}</p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p class="table-annotation">3</p>
+                  <p class="table-number">{{inclution[2] || '-'}}</p>
+                </td>
+                <td>
+                  <p class="table-annotation">6</p>
+                  <p class="table-number">{{inclution[5] || '-'}}</p>
+                </td>
+                <td>
+                  <p class="table-annotation">9</p>
+                  <p class="table-number">{{inclution[8] || '-'}}</p>
+                </td>
+              </tr>
+            </table>
+          </div>
+          <h3>Прогностика. Препятствия</h3>
+          <p v-for="challenge in prognostics.challenges" :key="challenge">{{challenge}}</p>
+          <h3>Прогностика. Пики</h3>
+          <p v-for="peak in prognostics.peaks" :key="peak">{{peak}}</p>
+          <div class="prognostic-dates">
+            <h3>От</h3>
+            <label>
+              <input
+                v-model="prognostics.from"
+                type="date"
+                placeholder="Введите дату"
+              />
+            </label>
+            <h3>До</h3>
+            <label>
+              <input
+                v-model="prognostics.to"
+                type="date"
+                placeholder="Введите дату"
+              />
+            </label>
+            <div class="count-prognostic-button m-button" @click="countPrognostic">Посчитать прогностику</div>
+          </div>
+        </div>
       </div>
       <div class="reload-button m-button" @click="copyTableToClipboard">Скопировать</div>
       <div class="reload-button m-button" @click="reset" >Сброс</div>

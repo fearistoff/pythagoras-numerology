@@ -120,7 +120,15 @@ new Vue({
       firstRow: "",
       secondRow: ""
     },
-    inclution: [0,0,0,0,0,0,0,0,0]
+    inclution: [0,0,0,0,0,0,0,0,0],
+    prognostics: {
+      challenges: [0,0,0,0],
+      peaks: [0,0,0,0],
+      string: "",
+      from: "",
+      to: "",
+      tree: {}
+    }
   },
   computed: {
     valid: function() {
@@ -230,6 +238,10 @@ new Vue({
       ...alphaNumbers.map(item => item.name.toUpperCase())
     ];
     this.savedList = JSON.parse(localStorage.getItem("savedPeoples")) || [];
+    const now = new Date();
+    this.prognostics.from = this.prognostics.to = `${now.getFullYear()}-${now.getMonth()+1 < 10 ? `0${now.getMonth()+1}` : now.getMonth()+1}-${now.getDate() < 10 ? `0${now.getDate()}` : now.getDate()}`;
+    console.log("this.from", this.prognostics.from);
+    console.log("this.to", this.prognostics.to);
   },
   methods: {
     countNumbers: function() {
@@ -297,6 +309,46 @@ new Vue({
         );
         this.results.CHDR = this.results.day;
         this.results.CHDR2 = this.splitAndAdd(this.results.day);
+        let first = 0;
+        const numberArray = this.getDateNumbers(this.date);
+        numberArray.forEach(item => {
+          first += item;
+        });
+        const second = this.sumAndCheck(first, "psycho");
+        const third = Math.abs(first - numberArray[0]*2);
+        const fourth = this.sumAndCheck(third, "psycho");
+        this.psycoMatrix.secondRow = `${first}.${second} ${third}.${fourth}`;
+        const fullNumberArray = [...numberArray.map(item => `${item}`), ...first.toString().split(''),...second.toString().split(''),...third.toString().split(''),...fourth.toString().split(''), ].join('');
+        fullNumberArray.split('').forEach(item => {
+          if (item === "1") {
+            this.psycoMatrix.character = this.addItem(this.psycoMatrix.character, item);
+          } else if (item === "2") {
+            this.psycoMatrix.energy = this.addItem(this.psycoMatrix.energy, item);
+          } else if (item === "3") {
+            this.psycoMatrix.interest = this.addItem(this.psycoMatrix.interest, item);
+          } else if (item === "4") {
+            this.psycoMatrix.health = this.addItem(this.psycoMatrix.health, item);
+          } else if (item === "5") {
+            this.psycoMatrix.sex = this.addItem(this.psycoMatrix.sex, item);
+          } else if (item === "6") {
+            this.psycoMatrix.work = this.addItem(this.psycoMatrix.work, item);
+          } else if (item === "7") {
+            this.psycoMatrix.luck = this.addItem(this.psycoMatrix.luck, item);
+          } else if (item === "8") {
+            this.psycoMatrix.duty = this.addItem(this.psycoMatrix.duty, item);
+          } else if (item === "9") {
+            this.psycoMatrix.intelligence = this.addItem(this.psycoMatrix.intelligence, item);
+          }
+        });
+        const day = this.sumAndCheck(parseInt(this.results.day), "prognostic");
+        const month = this.sumAndCheck(parseInt(this.results.month), "prognostic");
+        const year = this.sumAndCheck(parseInt(this.results.year), "prognostic");
+        this.prognostics.challenges = [Math.abs(month - day), Math.abs(day - year), Math.abs(Math.abs(month - day) - Math.abs(day - year)), Math.abs(month - year)].map((item, index) => {
+          return `${index + 1}-е Препятствие - ${item}`
+        });
+        this.prognostics.peaks = [this.sumAndCheck(day + month, "prognostic"), this.sumAndCheck(day + year, "prognostic"), this.sumAndCheck(month + day + day + year, "prognostic"), this.sumAndCheck(month + year, "prognostic")].map((item, index) => {
+          return `${index + 1}-й Пик - ${item}`
+        });
       }
       this.results.CHV = this.splitAndAdd(
         this.splitAndAdd(this.sumOfIntString(this.results.nameArray)) +
@@ -382,38 +434,6 @@ new Vue({
           this.results.CHJP + this.results.CHV2
         );
       }
-      let first = 0;
-      const numberArray = this.getDateNumbers(this.date);
-      numberArray.forEach(item => {
-        first += item;
-      });
-      const second = this.sumAndCheck(first);
-      const third = Math.abs(first - numberArray[0]*2);
-      const fourth = this.sumAndCheck(third);
-      this.psycoMatrix.secondRow = `${first}.${second} ${third}.${fourth}`;
-      const fullNumberArray = [...numberArray.map(item => `${item}`), ...first.toString().split(''),...second.toString().split(''),...third.toString().split(''),...fourth.toString().split(''), ].join('');
-      fullNumberArray.split('').forEach(item => {
-        if (item === "1") {
-          this.psycoMatrix.character = this.addItem(this.psycoMatrix.character, item);
-        } else if (item === "2") {
-          this.psycoMatrix.energy = this.addItem(this.psycoMatrix.energy, item);
-        } else if (item === "3") {
-          this.psycoMatrix.interest = this.addItem(this.psycoMatrix.interest, item);
-        } else if (item === "4") {
-          this.psycoMatrix.health = this.addItem(this.psycoMatrix.health, item);
-        } else if (item === "5") {
-          this.psycoMatrix.sex = this.addItem(this.psycoMatrix.sex, item);
-        } else if (item === "6") {
-          this.psycoMatrix.work = this.addItem(this.psycoMatrix.work, item);
-        } else if (item === "7") {
-          this.psycoMatrix.luck = this.addItem(this.psycoMatrix.luck, item);
-        } else if (item === "8") {
-          this.psycoMatrix.duty = this.addItem(this.psycoMatrix.duty, item);
-        } else if (item === "9") {
-          this.psycoMatrix.intelligence = this.addItem(this.psycoMatrix.intelligence, item);
-        }
-      });
-
       this.results.ready = true;
     },
     addItem(mainString = "", symbol = "") {
@@ -428,8 +448,9 @@ new Vue({
         return item;
       }).reverse().join('').split('').map(item => parseInt(item));
     },
-    sumAndCheck(number) {
-      if (number <= 12) {
+    sumAndCheck(number = 0, mode = "") {
+      let newNumber;
+      if ((mode === "psycho" && number <= 12) || (mode === "prognostic" && number < 10)) {
         return number;
       } else if (number > 999) {
         newNumber =
@@ -446,7 +467,7 @@ new Vue({
         newNumber =
           Math.floor((number / 10) % 10) + Math.floor(number % 10);
       }
-      return this.sumAndCheck(newNumber);
+      return this.sumAndCheck(newNumber, mode);
     },
     vowelsOrConsonants(string = "", array = [], vowels = false) {
       const vowelsList = [
@@ -666,6 +687,20 @@ new Vue({
       }
       document.execCommand("Copy");
       sel.removeAllRanges();
+    },
+    countPrognostic: function() {
+      this.getDates(this.prognostics.from, this.prognostics.to);
+    },
+    getDates: function(startDate = "", stopDate = "") {
+      startDate = new Date(startDate);
+      stopDate = new Date(stopDate);
+      const dateArray = [];
+      let currentDate = startDate;
+      while (currentDate <= stopDate) {
+        dateArray.push(new Date (currentDate));
+        currentDate = new Date(currentDate.setDate(currentDate.getDate()+1));
+      }
+      return dateArray;
     }
   }
 });
