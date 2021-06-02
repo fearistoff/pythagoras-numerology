@@ -101,7 +101,7 @@
       <div
         v-if="savedList.length"
         class="m-button"
-        @click="isSavedListShow = true"
+        @click="toggleShowSaveList"
       >
         Сохранённые
       </div>
@@ -114,7 +114,7 @@
           {{savedItem.header}}
         </li>
       </ul>
-      <div class="m-button" @click="isSavedListShow = false">Закрыть</div>
+      <div class="m-button" @click="toggleShowSaveList">Закрыть</div>
     </div>
   </transition>
   <transition name="fade" mode="in-out">
@@ -192,10 +192,14 @@
         {{ karmicNumbersString }}
       </p>
       <h3>Психоматрица</h3>
-      <div class="table-container">
-        <table cellspacing="0" cellpadding="0">
+      <p>{{psycoMatrix.firstRow}}</p>
+      <p>{{psycoMatrix.secondRow}}</p>
+      <p class="table-annotation">Нажмите на таблицу для копирования</p>
+      <div class="table-container" ref="table">
+        <table cellspacing="0" cellpadding="0" @click="copyTableToClipboard">
           <tr>
-            <td colspan="3"></td>
+            <td colspan="3">
+            </td>
             <td>
               <p class="table-annotation">Темперамент</p>
               <p class="table-number">{{psycoMatrix.interest.length + psycoMatrix.sex.length + psycoMatrix.luck.length || "-"}}</p>

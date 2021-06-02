@@ -117,7 +117,9 @@ new Vue({
       work: "",
       luck: "",
       duty: "",
-      intelligence: ""
+      intelligence: "",
+      firstRow: "",
+      secondRow: ""
     }
   },
   computed: {
@@ -134,15 +136,6 @@ new Vue({
       }
       const second = this.secondName.trim();
       second.split("").forEach(letter => {
-        if (!this.letters.includes(letter)) {
-          valid = false;
-        }
-      });
-      if (!valid) {
-        return false;
-      }
-      const father = this.patronymic.trim();
-      father.split("").forEach(letter => {
         if (!this.letters.includes(letter)) {
           valid = false;
         }
@@ -171,25 +164,15 @@ new Vue({
         if (!valid) {
           return false;
         }
-        const father2 = this.patronymic2.trim();
-        father2.split("").forEach(letter => {
-          if (!this.letters.includes(letter)) {
-            valid = false;
-          }
-        });
-        if (!valid) {
-          return false;
-        }
         return (
           !!first &&
           !!second &&
-          !!father &&
           !!date &&
-          (!!first2 || !!second2 || !!father2)
+          (!!first2 || !!second2)
         );
       }
 
-      return !!first && !!second && !!father && !!date;
+      return !!first && !!second && !!date;
     },
     controlNumbersString: function() {
       let string = "";
@@ -265,40 +248,40 @@ new Vue({
         first2Consonants,
         second2Consonants,
         father2Consonants;
-        this.results.nameArray = this.stringToArray(this.name.trim());
-        firstVowels = this.vowelsOrConsonants(
-          this.name.trim().toLowerCase(),
-          this.results.nameArray,
-          true
-        );
-        firstConsonants = this.vowelsOrConsonants(
-          this.name.trim().toLowerCase(),
-          this.results.nameArray
-        );
-        this.results.secondNameArray = this.stringToArray(
-          this.secondName.trim()
-        );
-        secondVowels = this.vowelsOrConsonants(
-          this.secondName.trim().toLowerCase(),
-          this.results.secondNameArray,
-          true
-        );
-        secondConsonants = this.vowelsOrConsonants(
-          this.secondName.trim().toLowerCase(),
-          this.results.secondNameArray
-        );
-        this.results.patronymicArray = this.stringToArray(
-          this.patronymic.trim()
-        );
-        fatherVowels = this.vowelsOrConsonants(
-          this.patronymic.trim().toLowerCase(),
-          this.results.patronymicArray,
-          true
-        );
-        fatherConsonants = this.vowelsOrConsonants(
-          this.patronymic.trim().toLowerCase(),
-          this.results.patronymicArray
-        );
+      this.results.nameArray = this.stringToArray(this.name.trim());
+      firstVowels = this.vowelsOrConsonants(
+        this.name.trim().toLowerCase(),
+        this.results.nameArray,
+        true
+      );
+      firstConsonants = this.vowelsOrConsonants(
+        this.name.trim().toLowerCase(),
+        this.results.nameArray
+      );
+      this.results.secondNameArray = this.stringToArray(
+        this.secondName.trim()
+      );
+      secondVowels = this.vowelsOrConsonants(
+        this.secondName.trim().toLowerCase(),
+        this.results.secondNameArray,
+        true
+      );
+      secondConsonants = this.vowelsOrConsonants(
+        this.secondName.trim().toLowerCase(),
+        this.results.secondNameArray
+      );
+      this.results.patronymicArray = this.stringToArray(
+        this.patronymic.trim()
+      );
+      fatherVowels = this.vowelsOrConsonants(
+        this.patronymic.trim().toLowerCase(),
+        this.results.patronymicArray,
+        true
+      );
+      fatherConsonants = this.vowelsOrConsonants(
+        this.patronymic.trim().toLowerCase(),
+        this.results.patronymicArray
+      );
       if (this.watchDate) {
         this.results.day = parseInt(this.date.split("-")[2]);
         this.results.month = parseInt(this.date.split("-")[1]);
@@ -396,22 +379,15 @@ new Vue({
         );
       }
       let first = 0;
-      console.log(this.date);
       const numberArray = this.getDateNumbers(this.date);
-      console.log(numberArray);
       numberArray.forEach(item => {
         first += item;
       });
-      console.log(first);
       const second = this.sumAndCheck(first);
-      console.log(second);
       const third = Math.abs(first - numberArray[0]*2);
-      console.log(third);
       const fourth = this.sumAndCheck(third);
-      console.log(fourth);
+      this.psycoMatrix.secondRow = `${first}.${second} ${third}.${fourth}`;
       const fullNumberArray = [...numberArray.map(item => `${item}`), ...first.toString().split(''),...second.toString().split(''),...third.toString().split(''),...fourth.toString().split(''), ].join('');
-      console.log(fullNumberArray);
-
       fullNumberArray.split('').forEach(item => {
         if (item === "1") {
           this.psycoMatrix.character = this.addItem(this.psycoMatrix.character, item);
@@ -433,13 +409,14 @@ new Vue({
           this.psycoMatrix.intelligence = this.addItem(this.psycoMatrix.intelligence, item);
         }
       });
-      
+
       this.results.ready = true;
     },
-    addItem(mainString = "", cymbol = "") {
-        return `${mainString}${cymbol}`;
+    addItem(mainString = "", symbol = "") {
+      return `${mainString}${symbol}`;
     },
     getDateNumbers(dateString = "") {
+      this.psycoMatrix.firstRow = dateString.split('-').reverse().join('.')
       return dateString.split('-').map(item => {
         if (item[0] === "0") {
           return item[1];
@@ -558,51 +535,51 @@ new Vue({
     reset: function() {
       this.results = {
         nameArray: [],
-          secondNameArray: [],
-          patronymicArray: [],
-          name2Array: [],
-          secondName2Array: [],
-          patronymic2Array: [],
-          day: 0,
-          month: 0,
-          year: 0,
-          ready: false,
-          controlNumbers: [],
-          controlNumbers2: [],
-          karmicNumbers: [],
-          karmicNumbers2: [],
-          CHDR: 0,
-          CHDR2: 0,
-          CHJP: 0,
-          CHV: 0,
-          CHV2: 0,
-          CHD: 0,
-          CHD2: 0,
-          CHL: 0,
-          CHL2: 0,
-          CHR: 0,
-          CHR2: 0
+        secondNameArray: [],
+        patronymicArray: [],
+        name2Array: [],
+        secondName2Array: [],
+        patronymic2Array: [],
+        day: 0,
+        month: 0,
+        year: 0,
+        ready: false,
+        controlNumbers: [],
+        controlNumbers2: [],
+        karmicNumbers: [],
+        karmicNumbers2: [],
+        CHDR: 0,
+        CHDR2: 0,
+        CHJP: 0,
+        CHV: 0,
+        CHV2: 0,
+        CHD: 0,
+        CHD2: 0,
+        CHL: 0,
+        CHL2: 0,
+        CHR: 0,
+        CHR2: 0
       };
       this.name = "";
-        this.secondName = "";
-        this.patronymic = "";
-        this.date = "2020-11-09";
-        this.otherName = false;
-        this.watchDate = true;
-        this.name2 = "";
-        this.secondName2 = "";
-        this.patronymic2 = "";
-        this.psycoMatrix = {
-          character: "",
-          energy: "",
-          interest: "",
-          health: "",
-          sex: "",
-          work: "",
-          luck: "",
-          duty: "",
-          intelligence: ""
-        }
+      this.secondName = "";
+      this.patronymic = "";
+      this.date = "2020-11-09";
+      this.otherName = false;
+      this.watchDate = true;
+      this.name2 = "";
+      this.secondName2 = "";
+      this.patronymic2 = "";
+      this.psycoMatrix = {
+        character: "",
+        energy: "",
+        interest: "",
+        health: "",
+        sex: "",
+        work: "",
+        luck: "",
+        duty: "",
+        intelligence: ""
+      }
     },
     clickHeader: function() {
       const now = new Date().getTime();
@@ -649,14 +626,49 @@ new Vue({
         this.secondName2 = item.secondName2;
         this.patronymic2 = item.patronymic2;
         this.otherName = true;
+      } else {
+        this.name2 = "";
+        this.secondName2 = "";
+        this.patronymic2 = "";
+        this.otherName = false;
       }
       if (item.date) {
         this.date = item.date;
         this.watchDate = true;
+      } else {
+        this.date = "";
+        this.watchDate = false;
+
       }
       this.countNumbers();
-      this.isSavedListShow = false;
+      this.toggleShowSaveList();
 
+    },
+    toggleShowSaveList() {
+      this.isSavedListShow = !this.isSavedListShow;
+      document.body.classList.toggle("lock-scroll");
+    },
+    copyTableToClipboard: function () {
+      const el = this.$refs.table;
+      let body = document.body, range, sel;
+      if (document.createRange && window.getSelection) {
+        range = document.createRange();
+        sel = window.getSelection();
+        sel.removeAllRanges();
+        try {
+          range.selectNodeContents(el);
+          sel.addRange(range);
+        } catch (e) {
+          range.selectNode(el);
+          sel.addRange(range);
+        }
+      } else if (body.createTextRange) {
+        range = body.createTextRange();
+        range.moveToElementText(el);
+        range.select();
+      }
+      document.execCommand("Copy");
+      sel.removeAllRanges();
     }
   }
 });

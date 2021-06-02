@@ -1,43 +1,43 @@
 /* основное */
 * {
-  margin: 0;
-  padding: 0;
-  outline: none;
-  font-family: 'Nunito', sans-serif;
+    margin: 0;
+    padding: 0;
+    outline: none;
+    font-family: 'Nunito', sans-serif;
 }
 
 
 [v-cloak] {
-  display: none;
+    display: none;
 }
 
 b, .painted {
-  color: #00865a;
+    color: #00865a;
 }
 
 p {
-  font-size: 24px;
+    font-size: 24px;
 }
 
 body {
-  background-color: #ffffff;
+    background-color: #ffffff;
 }
 
 h1 {
-  text-align: center;
-  font-size: 25px;
-  margin-bottom: 10px;
+    text-align: center;
+    font-size: 25px;
+    margin-bottom: 10px;
     user-select: none;
 }
 
 h2 {
-  text-align: center;
-  font-size: 22px;
+    text-align: center;
+    font-size: 22px;
 }
 
 h3 {
-  margin: 15px 0;
-  font-size: 17px;
+    margin: 15px 0;
+    font-size: 17px;
 }
 
 ul {
@@ -49,87 +49,87 @@ label {
 }
 
 .block-design {
-  background-color: #ffffff;
-  border-radius: 15px;
-  padding: 20px;
-  box-shadow: rgba(0, 0, 0, 0.3) 0 5px 10px 0;
+    background-color: #ffffff;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: rgba(0, 0, 0, 0.3) 0 5px 10px 0;
 }
 
 .m-button {
-  padding: 0.5em;
-  border-radius: 2em;
-  background-color: #7fffd4;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 10px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: background-color linear 0.2s;
+    padding: 0.5em;
+    border-radius: 2em;
+    background-color: #7fffd4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color linear 0.2s;
 }
 
 .m-button_disabled {
-  background-color: #bababa;
+    background-color: #bababa;
 }
 
 .m-button:hover {
-  background-color: #00ffaa;
+    background-color: #00ffaa;
 }
 
 input[type="text"], input[type="date"] {
-  font-size: 16px;
-  padding: 0.5em;
-  border-radius: 2em;
-  border: solid 1px #d4d4d4;
-  transition: border linear 0.2s, background-color linear 0.2s, color linear 0.2s;
-  display: block;
-  width: calc(100% - 18px);
-  margin: 0 0 10px 0;
-  -webkit-appearance: none;
+    font-size: 16px;
+    padding: 0.5em;
+    border-radius: 2em;
+    border: solid 1px #d4d4d4;
+    transition: border linear 0.2s, background-color linear 0.2s, color linear 0.2s;
+    display: block;
+    width: calc(100% - 18px);
+    margin: 0 0 10px 0;
+    -webkit-appearance: none;
 }
 
 .other-name-enter-active,
 .other-name-leave-active {
-  transition: max-height 1s ease;
-  max-height: 193px;
-  overflow: hidden;
+    transition: max-height 1s ease;
+    max-height: 193px;
+    overflow: hidden;
 }
 
 .other-name-enter,
 .other-name-leave-to {
-  max-height: 0;
-  overflow: hidden;
+    max-height: 0;
+    overflow: hidden;
 }
 
 .input-block-enter-active,
 .input-block-leave-active {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  transition: opacity linear .4s;
-  opacity: 1;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    transition: opacity linear .4s;
+    opacity: 1;
 }
 
 .input-block-enter,
 .input-block-leave-to {
-  opacity: 0;
+    opacity: 0;
 }
 
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity linear .4s;
-  opacity:1;
+    transition: opacity linear .4s;
+    opacity:1;
 }
 
 .fade-enter,
 .fade-leave-to {
-  opacity: 0;
+    opacity: 0;
 }
 
 .saved-list-enter-active,
 .saved-list-leave-active {
-    transition: opacity linear .4s, transform ease .4s;
+    transition: opacity linear .2s, transform ease .4s;
     opacity:1;
     transform: translateY(0);
 }
@@ -141,28 +141,28 @@ input[type="text"], input[type="date"] {
 }
 
 .input-block {
-  margin: 10px;
+    margin: 10px;
 }
 
 .date-input-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .watch-date-checkbox {
-  margin: 0 0 10px 10px;
-  height: 20px;
-  width: 20px;
+    margin: 0 0 10px 10px;
+    height: 20px;
+    width: 20px;
 }
 
 input.disabled {
-  color: #808080 !important;
-  background-color: #757575 !important;
+    color: #808080 !important;
+    background-color: #757575 !important;
 }
 
 .results {
-  padding: 10px;
+    padding: 10px;
 }
 
 .log-line {
@@ -192,66 +192,71 @@ input.disabled {
 }
 
 .table-container {
-  width: 100%;
-  overflow-x: auto;
+    width: 100%;
+    overflow-x: auto;
+}
+
+.lock-scroll {
+    overflow: hidden;
 }
 
 table {
-  padding: 2px;
+    padding: 2px;
 }
 
 .table-annotation {
-  font-size: 14px;
-  color: #808080;
+    font-size: 14px;
+    color: #808080;
 }
 
 .table-number {
-  font-size: 17px;
+    font-size: 17px;
 }
 
 td {
-  border: 1px solid #000000;
+    border: 1px solid #000000;
+    padding: 5px;
+    text-align: center;
 }
 
 @media (prefers-color-scheme: dark) {
-  body {
-    background-color: #000000;
-    color: #ffffff;
-  }
+    body {
+        background-color: #000000;
+        color: #ffffff;
+    }
 
-  td {
-    outline: 1px solid #ffffff;
-    padding: 5px;
-  }
+    td {
+        outline: 1px solid #ffffff;
+    }
 
     .reload-button {
         background-color: #9782ff80;
         color: #ffffff;
     }
 
-  .block-design {
-    background-color: #222222;
-  }
+    .block-design {
+        background-color: #222222;
+    }
 
-  input[type="text"], input[type="date"] {
-    background-color: #333333;
-    color: #ffffff;
-    border: 1px solid #757575;
-  }
+    input[type="text"], input[type="date"] {
+        background-color: #333333;
+        color: #ffffff;
+        border: 1px solid #757575;
+    }
 
-  .m-button {
-    background-color: #483d8b;
-  }
+    .m-button {
+        background-color: #483d8b;
+    }
 
-  b, .painted {
-    color: #9782ff;
-  }
+    b, .painted {
+        color: #9782ff;
+    }
 
-  .m-button_disabled {
-    background-color: #8581a0;
-  }
+    .m-button_disabled {
+        background-color: #8581a0;
+    }
 
-  .m-button:hover {
-    background-color: #7365d3;
-  }
+    .m-button:hover {
+        background-color: #7365d3;
+    }
 }
