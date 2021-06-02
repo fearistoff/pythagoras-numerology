@@ -66,14 +66,17 @@ label {
     cursor: pointer;
     font-weight: bold;
     transition: background-color linear 0.2s;
+    flex-grow: 1;
+    flex-shrink: 0;
 }
 
 .m-button_disabled {
     background-color: #bababa;
 }
 
-.m-button:hover {
-    background-color: #00ffaa;
+.m-button.enable {
+    background-color: red;
+    color: white;
 }
 
 input[type="text"], input[type="date"] {
@@ -138,6 +141,17 @@ input[type="text"], input[type="date"] {
 .saved-list-leave-to {
     opacity: 0;
     transform: translateY(100%);
+}
+
+.button-row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.delete-mode-button {
+    flex-grow: 0;
+    width: 23px;
+    margin-right: 5px;
 }
 
 .input-block {
@@ -254,9 +268,5 @@ td {
 
     .m-button_disabled {
         background-color: #8581a0;
-    }
-
-    .m-button:hover {
-        background-color: #7365d3;
     }
 }

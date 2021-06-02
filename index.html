@@ -26,6 +26,7 @@
     href="https://fonts.googleapis.com/css?family=Nunito&amp;display=swap"
     rel="stylesheet"
   />
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
   <link rel="stylesheet" href="./style.css" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
@@ -114,7 +115,12 @@
           {{savedItem.header}}
         </li>
       </ul>
-      <div class="m-button" @click="toggleShowSaveList">Закрыть</div>
+      <div class="button-row ">
+        <div class="m-button delete-mode-button" :class="{'enable': deleteMode}" @click="deleteMode = !deleteMode">
+          <i class="fas fa-trash"></i>
+        </div>
+        <div class="m-button" @click="toggleShowSaveList">Закрыть</div>
+      </div>
     </div>
   </transition>
   <transition name="fade" mode="in-out">

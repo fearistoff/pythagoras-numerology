@@ -90,6 +90,7 @@ new Vue({
       CHR: 0,
       CHR2: 0
     },
+    deleteMode: false,
     letters: [],
     controlNumbers: [11, 22, 33],
     karmicNumbers: [10, 13, 14, 16, 19],
@@ -618,6 +619,14 @@ new Vue({
       }
     },
     loadSavedItem: function (item) {
+      if (this.deleteMode) {
+        const index = this.savedList.findIndex(listItem => listItem.header === item.header);
+        if (index !== -1) {
+          this.savedList.splice(index,1);
+          localStorage.setItem("savedPeoples", JSON.stringify(this.savedList));
+        }
+        return;
+      }
       this.name = item.name;
       this.secondName = item.secondName;
       this.patronymic = item.patronymic;
