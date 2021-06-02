@@ -35,7 +35,7 @@
 <div id="app" v-cloak>
   <transition name="input-block" mode="in-out">
     <div v-if="!results.ready" class="input-block block-design">
-      <h1 @click="clickHeader" :class="{ painted: isLogMode }">
+      <h1>
         Пифагорейская нумерология
       </h1>
       <h3>Основное имя:</h3>
@@ -124,7 +124,7 @@
     </div>
   </transition>
   <transition name="fade" mode="in-out">
-    <div v-if="results.ready" class="results">
+    <div v-if="results.ready" class="results" ref="results">
       <h3>ФИО, ДР/ Характеристика</h3>
       <p>
         {{ name }} {{ secondName }} {{ patronymic
@@ -200,9 +200,8 @@
       <h3>Психоматрица</h3>
       <p>{{psycoMatrix.firstRow}}</p>
       <p>{{psycoMatrix.secondRow}}</p>
-      <p class="table-annotation">Нажмите на таблицу для копирования</p>
-      <div class="table-container" ref="table">
-        <table cellspacing="0" cellpadding="0" @click="copyTableToClipboard">
+      <div class="table-container">
+        <table cellspacing="0" cellpadding="0"  class="psycho-matrix-table">
           <tr>
             <td colspan="3">
             </td>
@@ -284,10 +283,55 @@
             </td>
           </tr>
         </table>
+        <h3>Карта инклюзий</h3>
+        <table class="inclution-table">
+          <tr>
+            <td>
+              <p class="table-annotation">1</p>
+              <p class="table-number">{{inclution[0] || '-'}}</p>
+            </td>
+            <td>
+              <p class="table-annotation">4</p>
+              <p class="table-number">{{inclution[3] || '-'}}</p>
+            </td>
+            <td>
+              <p class="table-annotation">7</p>
+              <p class="table-number">{{inclution[6] || '-'}}</p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p class="table-annotation">2</p>
+              <p class="table-number">{{inclution[1] || '-'}}</p>
+            </td>
+            <td>
+              <p class="table-annotation">5</p>
+              <p class="table-number">{{inclution[4] || '-'}}</p>
+            </td>
+            <td>
+              <p class="table-annotation">8</p>
+              <p class="table-number">{{inclution[7] || '-'}}</p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p class="table-annotation">3</p>
+              <p class="table-number">{{inclution[2] || '-'}}</p>
+            </td>
+            <td>
+              <p class="table-annotation">6</p>
+              <p class="table-number">{{inclution[5] || '-'}}</p>
+            </td>
+            <td>
+              <p class="table-annotation">9</p>
+              <p class="table-number">{{inclution[8] || '-'}}</p>
+            </td>
+          </tr>
+        </table>
       </div>
-      <div class="save-button m-button" @click="saveLocally" :class="{'m-button_disabled': isSaved}">{{isSaved? 'Сохранено' : 'Сохранить'}}</div>
+      <div class="reload-button m-button" @click="copyTableToClipboard">Скопировать</div>
       <div class="reload-button m-button" @click="reset" >Сброс</div>
-      <div v-if="logString && isLogMode" v-html="logString"></div>
+      <div class="save-button m-button" @click="saveLocally" :class="{'m-button_disabled': isSaved}">{{isSaved? 'Сохранено' : 'Сохранить'}}</div>
     </div>
   </transition>
 </div>

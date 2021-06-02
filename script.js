@@ -103,10 +103,8 @@ new Vue({
     name2: "",
     secondName2: "",
     patronymic2: "",
-    isLogMode: false,
     headerClickCounter: 0,
     headerClickTime: 0,
-    logString: "",
     savedList: [],
     isSavedListShow: false,
     psycoMatrix: {
@@ -121,7 +119,8 @@ new Vue({
       intelligence: "",
       firstRow: "",
       secondRow: ""
-    }
+    },
+    inclution: [0,0,0,0,0,0,0,0,0]
   },
   computed: {
     valid: function() {
@@ -283,6 +282,10 @@ new Vue({
         this.patronymic.trim().toLowerCase(),
         this.results.patronymicArray
       );
+      const allArray = [...this.results.patronymicArray, ...this.results.secondNameArray, ...this.results.nameArray];
+      allArray.forEach(item => {
+        this.inclution[item - 1]++;
+      })
       if (this.watchDate) {
         this.results.day = parseInt(this.date.split("-")[2]);
         this.results.month = parseInt(this.date.split("-")[1]);
@@ -582,21 +585,6 @@ new Vue({
         intelligence: ""
       }
     },
-    clickHeader: function() {
-      const now = new Date().getTime();
-      if (now - this.headerClickTime > 500) {
-        this.headerClickCounter = 0;
-        this.headerClickTime = now;
-        return;
-      }
-      this.headerClickTime = now;
-      this.headerClickCounter++;
-      if (this.headerClickCounter === 2) {
-        this.isLogMode = !this.isLogMode;
-        this.headerClickCounter = 0;
-        this.headerClickTime = now;
-      }
-    },
     saveLocally: function () {
       if (!this.isSaved) {
         const value = {
@@ -658,7 +646,7 @@ new Vue({
       document.body.classList.toggle("lock-scroll");
     },
     copyTableToClipboard: function () {
-      const el = this.$refs.table;
+      const el = this.$refs.results;
       let body = document.body, range, sel;
       if (document.createRange && window.getSelection) {
         range = document.createRange();
